@@ -14,15 +14,16 @@
 
 t_adds  seto(void)
 {
-    t_adds adds;
-    adds->plus = FALSE;
-    adds->minus = FALSE;
-    adds->zero = FALSE;
-    adds->space = FALSE;
-    adds->hash = FALSE;
-    adds->tmp = FALSE;
-    adds->len = FALSE;
-    adds->width = FALSE;
-    adds->precision = FALSE;
-    return (adds);
+    t_adds ptr;
+    
+    ptr->plus = FALSE;
+    ptr->minus = FALSE;
+    ptr->zero = FALSE;
+    ptr->space = FALSE;
+    ptr->hash = FALSE;
+    ptr->tmp = FALSE;
+    ptr->len = FALSE;
+    ptr->width = FALSE;
+    ptr->precision = FALSE;
+    return (ptr);
 }

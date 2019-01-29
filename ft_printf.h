@@ -19,7 +19,9 @@
 
 #define TRUE 1
 #define FALSE 0
-
+//function pointer
+void	(*func_ptr)(const char*, t_adds, int*, va_list);
+//structs
 typedef struct s_adds
 {
 	int		plus;
@@ -33,6 +35,9 @@ typedef struct s_adds
 	int		precision;
 } 				t_adds;
 
+//main func
 int		ft_printf(const char *format, ...);
+//libft/helpers
+void	ft_putchar(char c);
 
 #endif
