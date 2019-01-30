@@ -12,25 +12,25 @@
 
 
 NAME = libftprintf.a
-CFILES = ft_printf.c
-OFILES = ft_printf.o
+CFILES = ft_printf.c adlfiles.c manip.c
+OFILES = ft_printf.o adlfile.o  manip.o
 CFLAGS = -Wall -Werror -Wextra
 CC = gcc
-HEADER = printf.h
+HEADER = ft_printf.h
 
 all: $(NAME)
 
 $(NAME):$(OFILES)
-	ar rcs $(NAME) $(OFILES)
+	@ar rcs $(NAME) $(OFILES)
 
 $(OFILES):$(CFILES)
 	@$(CC) $(CFLAGS) -I $(HEADER) $(CFILES)
 
 clean: 
-	rm -rf $(OFILES)
+	@rm -rf $(OFILES)
 
 fclean: clean
-	rm -rf $(NAME)
+	@rm -rf $(NAME)
 
 re: fclean all
 	

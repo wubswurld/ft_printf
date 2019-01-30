@@ -10,12 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
-t_adds  seto(void)
-{
-    t_adds ptr;
-    
+void  seto(t_adds *ptr)
+{   
     ptr->plus = FALSE;
     ptr->minus = FALSE;
     ptr->zero = FALSE;
@@ -25,5 +23,4 @@ t_adds  seto(void)
     ptr->len = FALSE;
     ptr->width = FALSE;
     ptr->precision = FALSE;
-    return (ptr);
-}
+ }

@@ -10,17 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINTF_H
-# define PRINTF_H
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-#include <stdio.h>
-#include <stdarg.h>
-#include <unistd.h>
+# include <stdio.h>
+# include <stdarg.h>
+# include <stdint.h>
+# include <wchar.h>
+# include <locale.h>
+# include <unistd.h>
 
-#define TRUE 1
-#define FALSE 0
+//boolean
+# define TRUE 1
+# define FALSE 0
 //function pointer
-void	(*func_ptr)(const char*, t_adds, int*, va_list);
+// void	(*func_ptr)(const char*, t_adds, int*, va_list);
 //structs
 typedef struct s_adds
 {
@@ -37,7 +41,10 @@ typedef struct s_adds
 
 //main func
 int		ft_printf(const char *format, ...);
+int			parse(const char *format, t_adds ptr, va_list arg);
 //libft/helpers
 void	ft_putchar(char c);
+//initialize
+void  seto(t_adds *ptr);
 
 #endif

@@ -10,25 +10,30 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 #include <stdarg.h>
 #include <unistd.h>
 #include <stdlib.h>
 
-void	ft_putchar(char c)
-{
-	write (1, &c, 1);
-}
 void	(*func_ptr)(const char*, t_adds, int*, va_list);
-void	(*func_ptr1)(const char*, t_adds, int*, va_list);
 
-int			ft_flags(const char *format, t_adds adds, int *x, va_list arg)
+int			check_flag(t_adds ptr, va_list arg)
+{
+
+}
+int			ft_flags(const char *format, t_adds ptr, int *x, va_list arg)
 {
 	//x is a int ptr so x automatically refreshes in each other function
-	(*func_ptr)(format[*i])
+	while (mod_strchr(format[*x], "sSpdDioOuUxXcC") < 0 && format[*x] == '\0')
+	{
+		break ;
+	}
+	//saves coversion char following the '%'
+	ptr->type = format[*x];
+	return(check_flag(ptr, arg));
 }
 
-int			parse(const char *format, t_adds adds, va_list arg)
+int			parse(const char *format, t_adds ptr, va_list arg)
 {
 	int		x;
 	int 	rtn;
@@ -45,8 +50,8 @@ int			parse(const char *format, t_adds adds, va_list arg)
 		if (*format == '%')
 		{
 			//save address of x so you know what position of the '%'; 
-			rtn += ft_flags(format, adds, arg, &x);
-			adds = seto();
+			 rtn += ft_flags(format, ptr, arg, &x);
+			 seto(&ptr);
 		}
 		x++;
 	}
@@ -57,18 +62,17 @@ int			ft_printf(const char *format, ...)
 {
 	int		rtn;
 	va_list	arg;
-	t_adds	adds;
-	int	(*func_ptr1)(const char*, t_adds, int*, va_list);
-	func_ptr1 = &parse
+	t_adds	ptr;
 
+//inizilize arg to  
 	va_start(arg, format);
-	adds = seto();
-	rtn = parse(format, adds, arg);
+	seto(&ptr);
+	rtn = parse(format, ptr, arg);
 	va_end(arg);
 	return (rtn);
 }
 int main ()
 {
-	ft_printf("lol\nlol\n");
-	printf("lol\nlol\n");
+	ft_printf("lollol\n");
+	printf("lollol\n");
 }
