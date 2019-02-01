@@ -12,6 +12,26 @@
 
 #include "ft_printf.h"
 
+int         check_flags(t_whole *sp)
+{
+    while (TMP != 0)
+    {
+        if (TMP == 'c')
+            TMP = va_arg(sp->arg, int);
+    }
+    return (0);
+}
+
+int         ft_flags(const char *format, t_whole *sp)
+{
+    while (mod_strchr(format[sp->x], "sSpdDioOUxXcC") <= FALSE && format[sp->x] == '\0')
+    {
+        break ;
+    }
+    TMP = format[sp->x];
+    return (check_flags(sp));
+}
+
 int			parse(const char *format, t_whole *sp)
 {
     sp->x = 0;
@@ -27,6 +47,7 @@ int			parse(const char *format, t_whole *sp)
         {
             sp->rtn += ft_flags(format, sp);
             ft_zero(sp);
+            break ;
         }
         if (format[sp->x] == '%' && format[sp->x + 1] == '%')
             ft_putchar('%');
@@ -34,6 +55,7 @@ int			parse(const char *format, t_whole *sp)
     }
     return (sp->rtn);
 }
+
 int     ft_printf(const char *format, ...)
 {
     t_whole *sp;
@@ -46,4 +68,3 @@ int     ft_printf(const char *format, ...)
     va_end(sp->arg);
     return(sp->rtn);
 }
-

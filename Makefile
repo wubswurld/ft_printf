@@ -12,7 +12,7 @@
 
 
 NAME = libftprintf.a
-CFILES = ft_printf.c ft_extra.c
+CFILES = ft_printf.c ft_extra.c main.c
 OFILES = *.o
 CFLAGS = -Wall -Werror -Wextra
 CC = gcc
