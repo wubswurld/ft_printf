@@ -43,14 +43,13 @@ int			parse(const char *format, t_whole *sp)
             ft_putchar(format[sp->x]);
             sp->rtn++;
         }
-        if (format[sp->x] == '%')
+        else if (format[sp->x] == '%')
         {
+            if (format[sp->x] != '\0' && format[sp->x + 1] == '%')
+                ft_putchar('%');
             sp->rtn += ft_flags(format, sp);
             ft_zero(sp);
-            break ;
         }
-        if (format[sp->x] == '%' && format[sp->x + 1] == '%')
-            ft_putchar('%');
         sp->x++;
     }
     return (sp->rtn);

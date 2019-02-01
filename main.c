@@ -15,7 +15,6 @@
 
 int		main()
 {
-	ft_printf("%%");
-	printf("%%");
+	ft_printf("l%%ol");
 	return (0);
 }
