@@ -14,6 +14,7 @@
 # define FT_PRINTF_H
 
 # include <stdio.h>
+# include <stdlib.h>
 # include <stdarg.h>
 # include <stdint.h>
 # include <wchar.h>
@@ -23,8 +24,15 @@
 //boolean
 # define TRUE 1
 # define FALSE 0
-//function pointer
-// void	(*func_ptr)(const char*, t_adds, int*, va_list);
+# define PLUS sp->ptr->plus
+# define MINUS sp->ptr->minus
+# define ZERO sp->ptr->zero
+# define SPACE sp->ptr->space
+# define HASH sp->ptr->hash
+# define TMP sp->ptr->tmp
+# define LEN sp->ptr->len
+# define WIDTH sp->ptr->width
+# define PRECISION sp->ptr->precision
 //structs
 typedef struct s_adds
 {
@@ -39,12 +47,21 @@ typedef struct s_adds
 	int		precision;
 } 				t_adds;
 
+typedef	struct s_whole
+{
+	int		x;
+	int		rtn;
+	va_list arg;
+	t_adds	*ptr;
+}				t_whole;
+
 //main func
 int		ft_printf(const char *format, ...);
-int			parse(const char *format, t_adds ptr, va_list arg);
+int			parse(const char *format, t_whole *sp);
 //libft/helpers
 void	ft_putchar(char c);
+char	mod_strchr(char c, char *s1);
 //initialize
-void  seto(t_adds *ptr);
+void    ft_zero(t_whole *sp);
 
 #endif

@@ -12,8 +12,8 @@
 
 
 NAME = libftprintf.a
-CFILES = ft_printf.c adlfiles.c manip.c
-OFILES = ft_printf.o adlfile.o  manip.o
+CFILES = ft_printf.c ft_extra.c
+OFILES = *.o
 CFLAGS = -Wall -Werror -Wextra
 CC = gcc
 HEADER = ft_printf.h
