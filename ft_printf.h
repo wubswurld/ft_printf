@@ -24,15 +24,9 @@
 //boolean
 # define TRUE 1
 # define FALSE 0
-# define PLUS sp->ptr->plus
-# define MINUS sp->ptr->minus
-# define ZERO sp->ptr->zero
-# define SPACE sp->ptr->space
-# define HASH sp->ptr->hash
-# define TMP sp->ptr->tmp
-# define LEN sp->ptr->len
-# define WIDTH sp->ptr->width
-# define PRECISION sp->ptr->precision
+
+//sSpdDioOUxXcC
+//# define FLAGS(c) (c == 'c')
 //structs
 typedef struct s_adds
 {
@@ -51,6 +45,7 @@ typedef	struct s_whole
 {
 	int		x;
 	int		rtn;
+	va_list arg2;
 	va_list arg;
 	t_adds	*ptr;
 }				t_whole;
@@ -62,6 +57,6 @@ int			parse(const char *format, t_whole *sp);
 void	ft_putchar(char c);
 char	mod_strchr(char c, char *s1);
 //initialize
-void    ft_zero(t_whole *sp);
+void    ft_zero(t_adds *ptr);
 
 #endif

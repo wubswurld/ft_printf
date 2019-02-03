@@ -14,21 +14,27 @@
 
 int         check_flags(t_whole *sp)
 {
-    while (TMP != 0)
+    while (sp->ptr->tmp > 0)
     {
-        if (TMP == 'c')
-            TMP = va_arg(sp->arg, int);
+        char tp;
+        tp = va_arg(sp->arg, int);
+        va_copy(sp->arg2, sp->arg);
+        write(1, "b\n", 2);
+        if (sp->ptr->tmp == 'c')
+        {
+            ft_putchar(va_arg(sp->arg2, int));
+        }
     }
     return (0);
 }
 
 int         ft_flags(const char *format, t_whole *sp)
 {
-    while (mod_strchr(format[sp->x], "sSpdDioOUxXcC") <= FALSE && format[sp->x] == '\0')
+    while (!(mod_strchr(format[sp->x], "sSpdDioOUxXcC")) && format[sp->x] == '\0')
     {
         break ;
     }
-    TMP = format[sp->x];
+    sp->ptr->tmp = format[sp->x];
     return (check_flags(sp));
 }
 
@@ -36,19 +42,21 @@ int			parse(const char *format, t_whole *sp)
 {
     sp->x = 0;
     sp->rtn = 0;
-    while (format[sp->x])
+    while (format[sp->x] != '\0')
     {
         if (format[sp->x] != '%')
         {
             ft_putchar(format[sp->x]);
             sp->rtn++;
         }
-        else if (format[sp->x] == '%')
+        if (format[sp->x] == '%')
         {
             if (format[sp->x] != '\0' && format[sp->x + 1] == '%')
                 ft_putchar('%');
+            //add # of chars to the end of rtn & return # of chars
             sp->rtn += ft_flags(format, sp);
-            ft_zero(sp);
+            write (1, "l\n", 1);
+            ft_zero(sp->ptr);
         }
         sp->x++;
     }
@@ -61,9 +69,12 @@ int     ft_printf(const char *format, ...)
 
     if (!(sp = (t_whole *)malloc(sizeof(t_whole))))
         exit(1);
+    if (!(sp->ptr = (t_adds *)malloc(sizeof(t_adds))))
+        exit(1);
     va_start(sp->arg, format);
-    ft_zero(sp);
+    ft_zero(sp->ptr);
     sp->rtn = parse(format, sp);
+    free(sp);
     va_end(sp->arg);
     return(sp->rtn);
 }

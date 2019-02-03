@@ -15,6 +15,9 @@
 
 int		main()
 {
-	ft_printf("l%%ol");
+	char c;
+
+	c = 'b';
+	ft_printf("%c\n", c);
 	return (0);
 }

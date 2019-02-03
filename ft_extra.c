@@ -12,16 +12,16 @@
 
 #include "ft_printf.h"
 
-void    ft_zero(t_whole *sp)
+void    ft_zero(t_adds *ptr)
 {
-    PLUS = 0;
-    MINUS = 0;
-    WIDTH = 0;
-    PRECISION = 0;
-    ZERO = 0;
-    SPACE = 0;
-    LEN = 0;
-    HASH = 0;
+    ptr->plus = 0;
+    ptr->minus = 0;
+    ptr->width = 0;
+    ptr->precision = 0;
+    ptr->zero = 0;
+    ptr->space = 0;
+    ptr->len = 0;
+    ptr->hash = 0;
 }
 
 void    ft_putchar(char c)
