@@ -15,9 +15,10 @@
 
 int		main()
 {
-	char c;
+	int	c;
 
-	c = 'b';
-	ft_printf("%c\n", c);
+	c = 2;
+	ft_printf("%+d\n", c);
+	printf("%+d\n", c);
 	return (0);
 }

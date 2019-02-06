@@ -45,17 +45,24 @@ typedef	struct s_whole
 {
 	int		x;
 	int		rtn;
-	va_list arg2;
 	va_list arg;
 	t_adds	*ptr;
+	char	*tp;
 }				t_whole;
 
 //main func
-int		ft_printf(const char *format, ...);
+int			ft_printf(const char *format, ...);
 int			parse(const char *format, t_whole *sp);
+int         check_flags(t_whole *sp);
+int         ft_flags(const char *format, t_whole *sp);
+int         check_str(t_whole *sp);
+int         check_digit(t_whole *sp);
 //libft/helpers
-void	ft_putchar(char c);
-char	mod_strchr(char c, char *s1);
+void		ft_putchar(char c);
+void    	ft_putstr(char *str);
+int			mod_strchr(char c, char *s1);
+void		ft_putnbr(int n);
+int     	num_len(int c);
 //initialize
 void    ft_zero(t_adds *ptr);
 
