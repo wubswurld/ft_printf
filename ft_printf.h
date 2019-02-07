@@ -57,12 +57,14 @@ int         check_flags(t_whole *sp);
 int         ft_flags(const char *format, t_whole *sp);
 int         check_str(t_whole *sp);
 int         check_digit(t_whole *sp);
+int         get_width(t_whole *sp);
 //libft/helpers
 void		ft_putchar(char c);
 void    	ft_putstr(char *str);
 int			mod_strchr(char c, char *s1);
 void		ft_putnbr(int n);
 int     	num_len(int c);
+int     	ft_strlen(char *str);
 //initialize
 void    ft_zero(t_adds *ptr);
 

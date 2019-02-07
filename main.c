@@ -15,10 +15,9 @@
 
 int		main()
 {
-	int	c;
-
-	c = 2;
-	ft_printf("%+d\n", c);
-	printf("%+d\n", c);
+	char *str;
+	str = "abc";
+	ft_printf("[%8s]\n", str);
+	printf("[%8s]\n", str);
 	return (0);
 }

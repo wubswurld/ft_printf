@@ -13,7 +13,7 @@
 
 NAME = libftprintf.a
 
-CFILES = ft_printf.c ft_extra.c main.c
+CFILES = ft_printf.c ft_extra.c ex.c main.c
 
 EX = main.c
 

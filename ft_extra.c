@@ -12,18 +12,6 @@
 
 #include "ft_printf.h"
 
-void    ft_zero(t_adds *ptr)
-{
-    ptr->plus = 0;
-    ptr->minus = 0;
-    ptr->width = 0;
-    ptr->precision = 0;
-    ptr->zero = 0;
-    ptr->space = 0;
-    ptr->len = 0;
-    ptr->hash = 0;
-}
-
 void    ft_putchar(char c)
 {
     write (1, &c, 1);
@@ -39,6 +27,16 @@ void    ft_putstr(char *str)
         ft_putchar(str[x]);
         x++;
     }
+}
+
+int     ft_strlen(char *str)
+{
+    int x;
+
+    x = 0;
+    while (str[x])
+        return (x++);
+    return (x);
 }
 
 int     num_len(int c)
@@ -71,7 +69,7 @@ void	ft_putnbr(int n)
 	ft_putchar(n % 10 + 48);
 }
 
-int	mod_strchr(char c, char *s1)
+int	    mod_strchr(char c, char *s1)
 {
     int     a;
 
@@ -83,4 +81,9 @@ int	mod_strchr(char c, char *s1)
         a++;
     }
     return (0);
+}
+
+int     ft_atoi()
+{
+    
 }

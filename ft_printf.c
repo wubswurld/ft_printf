@@ -22,66 +22,52 @@ int         check_flags(t_whole *sp)
           sp->rtn += 1;
       }
       if (sp->ptr->tmp == 's')
-      {
           check_str(sp);
-      }
       if (sp->ptr->tmp == 'd' || sp->ptr->tmp == 'i')
-      {
           check_digit(sp);
-      }
       sp->x++;
     }
     return (sp->rtn);
 }
 
-int         check_digit(t_whole *sp)
+int         get_width(t_whole *sp)
 {
-    int     arr;
+    int a;
 
-    arr = va_arg(sp->arg, int);
-    if (arr)
-        ft_putnbr(arr);
-    sp->rtn += num_len(arr);
+    a = 0;
+    sp->ptr->width = ft_atoi(sp->ptr->width);
+    while (a < sp->ptr->width)
+    {
+        ft_putchar(' ');
+        a++;
+    }
+    if (a == '\0' && sp->rtn < a)
+    {
+        a -= ft_strlen(va_arg(sp->arg, char *));
+        a++;
+    }
+    sp->rtn += a;
     return (sp->rtn);
 }
-
-int         check_str(t_whole *sp)
-{
-    int    x;
-    char *tp;
-
-    x = 0;
-    tp = va_arg(sp->arg, char *);
-    ft_putstr(&tp[x]);
-    x++;
-    sp->rtn += x;
-    return (sp->rtn);
-}
-
-// int         get_width(const char *format, t_whole *sp)
-// {
-//     if ()
-
-//     return (sp->rtn);
-// }
 
 int         ft_flags(const char *format, t_whole *sp)
 {
-    while (!mod_strchr(format[sp->x], "sSpdDioOUxXcC") && format[sp->x] != '\0')
+    if (!mod_strchr(format[sp->x], "sSpdDioOUxXcC") && format[sp->x] != '\0')
     {
-        if (format[sp->x + 1] == '-' && format[sp->x + 1] != '\0')
+        if (format[sp->x + 1] == '-' && format[sp->x] != '\0')
         {
             write (1, "w\n", 2);
         }
         if (format[sp->x + 1] == '+' && format[sp->x] != '\0')
         {
             ft_putchar('+');
-        }
-        if (format[sp->x] >= '0' && format[sp->x] <= '9' && format[sp->x + 1] != '\0')
-        {
-            sp->ptr->width = format[sp->x];
             sp->x++;
-            //get_width(format, sp);
+        }
+        if (format[sp->x + 1] >= '0' && format[sp->x + 1] <= '9' && format[sp->x] != '\0')
+        {
+            sp->ptr->width = format[sp->x + 1];
+            sp->x++;
+            get_width(sp);
         }
         sp->rtn++;
     }
