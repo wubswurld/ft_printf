@@ -22,10 +22,7 @@ int         check_flags(t_whole *sp)
           sp->rtn += 1;
       }
       if (sp->ptr->tmp == 's')
-      {
-          get_width(sp);
           check_str(sp);
-      }
       if (sp->ptr->tmp == 'd' || sp->ptr->tmp == 'i')
           check_digit(sp);
       sp->x++;
@@ -36,34 +33,23 @@ int         check_flags(t_whole *sp)
 int         get_width(t_whole *sp)
 {
     int a;
+    int x;
+    //int ap;
 
     a = 0;
-    sp->tsp = va_arg(sp->arg, char *);
+    x = 0;
+    printf("%d", sp->arg[0]);
+    //ap = va_arg(sp->arg, char *);
     while (a < sp->ptr->width)
     {
         ft_putchar(' ');
         a++;
     }
-    if (sp->rtn < a)
-    {
-        a -= ft_strlen(sp->tsp);
-    }
+    // while (ap != '\0')
+    //     x++;
     sp->rtn += a;
-    return (sp->rtn);  
-    // sp->tsp = va_arg(sp->arg, char *);
-    // while (a < sp->ptr->width)
-    // {
-    //     ft_putchar(' ');
-    //     a++;
-    // }
-    // while (a > ft_strlen(sp->tsp))
-    // {
-    //     a--;
-    // }
-    // sp->rtn += a;
-    // return (sp->rtn);
+    return (sp->rtn);
 }
-
 int         ft_flags(const char *format, t_whole *sp)
 {
     if (!mod_strchr(format[sp->x], "sSpdDioOUxXcC") && format[sp->x] != '\0')
@@ -80,6 +66,7 @@ int         ft_flags(const char *format, t_whole *sp)
         if (format[sp->x + 1] >= '0' && format[sp->x + 1] <= '9' && format[sp->x] != '\0')
         {
             sp->ptr->width = ft_atoi(&format[sp->x + 1]);
+            get_width(sp);
             sp->x++;
         }
         sp->rtn++;
@@ -125,7 +112,6 @@ int     ft_printf(const char *format, ...)
     va_start(sp->arg, format);
     ft_zero(sp->ptr);
     sp->rtn = parse(format, sp);
-    free(sp);
     va_end(sp->arg);
     return(sp->rtn);
 }

@@ -47,7 +47,6 @@ typedef	struct s_whole
 	int		rtn;
 	va_list arg;
 	t_adds	*ptr;
-	char	*tsp;
 }				t_whole;
 
 //main func
