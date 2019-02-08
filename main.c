@@ -16,7 +16,7 @@
 int		main()
 {
 	char *str;
-	str = "abc";
+	str = "abcdefhi";
 	ft_printf("[%8s]\n", str);
 	printf("[%8s]\n", str);
 	return (0);

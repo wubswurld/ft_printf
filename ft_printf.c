@@ -22,7 +22,10 @@ int         check_flags(t_whole *sp)
           sp->rtn += 1;
       }
       if (sp->ptr->tmp == 's')
+      {
+          get_width(sp);
           check_str(sp);
+      }
       if (sp->ptr->tmp == 'd' || sp->ptr->tmp == 'i')
           check_digit(sp);
       sp->x++;
@@ -35,19 +38,30 @@ int         get_width(t_whole *sp)
     int a;
 
     a = 0;
-    sp->ptr->width = ft_atoi(sp->ptr->width);
+    sp->tsp = va_arg(sp->arg, char *);
     while (a < sp->ptr->width)
     {
         ft_putchar(' ');
         a++;
     }
-    if (a == '\0' && sp->rtn < a)
+    if (sp->rtn < a)
     {
-        a -= ft_strlen(va_arg(sp->arg, char *));
-        a++;
+        a -= ft_strlen(sp->tsp);
     }
     sp->rtn += a;
-    return (sp->rtn);
+    return (sp->rtn);  
+    // sp->tsp = va_arg(sp->arg, char *);
+    // while (a < sp->ptr->width)
+    // {
+    //     ft_putchar(' ');
+    //     a++;
+    // }
+    // while (a > ft_strlen(sp->tsp))
+    // {
+    //     a--;
+    // }
+    // sp->rtn += a;
+    // return (sp->rtn);
 }
 
 int         ft_flags(const char *format, t_whole *sp)
@@ -65,9 +79,8 @@ int         ft_flags(const char *format, t_whole *sp)
         }
         if (format[sp->x + 1] >= '0' && format[sp->x + 1] <= '9' && format[sp->x] != '\0')
         {
-            sp->ptr->width = format[sp->x + 1];
+            sp->ptr->width = ft_atoi(&format[sp->x + 1]);
             sp->x++;
-            get_width(sp);
         }
         sp->rtn++;
     }

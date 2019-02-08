@@ -47,7 +47,7 @@ typedef	struct s_whole
 	int		rtn;
 	va_list arg;
 	t_adds	*ptr;
-	char	*tp;
+	char	*tsp;
 }				t_whole;
 
 //main func
@@ -65,6 +65,12 @@ int			mod_strchr(char c, char *s1);
 void		ft_putnbr(int n);
 int     	num_len(int c);
 int     	ft_strlen(char *str);
+char		*ft_itoa(int nbr);
+char		*ft_strnew(size_t n);
+char		*ft_strdup(const char *s1);
+void		*ft_memset(void *a, int b, size_t n);
+int			ft_nbr_len(int n);
+int			ft_atoi(const char *str);
 //initialize
 void    ft_zero(t_adds *ptr);
 
