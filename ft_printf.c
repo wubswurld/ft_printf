@@ -12,61 +12,70 @@
 
 #include "ft_printf.h"
 
-int         check_flags(t_whole *sp)
+void    ft_zero(t_adds *ptr)
 {
-    if (sp->ptr->tmp > 0)
+    ptr->plus = 0;
+    ptr->minus = 0;
+    ptr->width = 0;
+    ptr->precision = 0;
+    ptr->zero = 0;
+    ptr->space = 0;
+    ptr->len = 0;
+    ptr->hash = 0;
+}
+
+int        check_flags(t_whole *sp)
+{
+    if (sp->ptr->tmp)
     {
       if (sp->ptr->tmp == 'c')
-      {
-          ft_putchar(va_arg(sp->arg, int));
-          sp->rtn += 1;
-      }
+          check_char(sp); 
       if (sp->ptr->tmp == 's')
           check_str(sp);
       if (sp->ptr->tmp == 'd' || sp->ptr->tmp == 'i')
           check_digit(sp);
-      sp->x++;
+        sp->x++;
     }
-    return (sp->rtn);
+    //   if (sp->ptr->tmp == 'x' || sp->ptr->tmp == 'X')
+    //       check_hex(sp);
+    return (sp->rtn); 
 }
 
-int         get_width(t_whole *sp)
+int         check_width(t_whole *sp)
 {
-    int a;
-    int x;
-    //int ap;
-
-    a = 0;
-    x = 0;
-    printf("%d", sp->arg[0]);
-    //ap = va_arg(sp->arg, char *);
-    while (a < sp->ptr->width)
+    sp->a = 0;
+    while (sp->a < sp->ptr->width)
     {
-        ft_putchar(' ');
-        a++;
+       ft_putchar(' ');
+       sp->a++;
     }
-    // while (ap != '\0')
-    //     x++;
-    sp->rtn += a;
+    sp->rtn += sp->a;
     return (sp->rtn);
 }
+
 int         ft_flags(const char *format, t_whole *sp)
 {
-    if (!mod_strchr(format[sp->x], "sSpdDioOUxXcC") && format[sp->x] != '\0')
+    if (!mod_strchr(format[sp->x], "sSpdDioOUxXcC") && format[sp->x])
     {
-        if (format[sp->x + 1] == '-' && format[sp->x] != '\0')
-        {
-            write (1, "w\n", 2);
-        }
-        if (format[sp->x + 1] == '+' && format[sp->x] != '\0')
-        {
-            ft_putchar('+');
+        if (format[sp->x] != '\0' && format[sp->x + 1] == '-')
+        {    
+            sp->ptr->minus = 1;
             sp->x++;
         }
-        if (format[sp->x + 1] >= '0' && format[sp->x + 1] <= '9' && format[sp->x] != '\0')
+        if (format[sp->x + 1] == '+' && format[sp->x] != '\0')
+            sp->ptr->plus = 1;
+        if (format[sp->x + 1] == '0' && format[sp->x + 1] != '\0')
+            sp->ptr->zero = 1;
+        if (format[sp->x + 1] == '#' && format[sp->x + 1] != '\0')
+            sp->ptr->hash = 1;
+        if (format[sp->x + 1] == ' ' && format[sp->x + 1] != '\0')
+            sp->ptr->space = 1;
+        if (format[sp->x + 1] == '.' && format[sp->x + 1] != '\0')
+            sp->ptr->precision = 1;    
+        if (ft_isdigit(format[sp->x + 1]) && format[sp->x])
         {
             sp->ptr->width = ft_atoi(&format[sp->x + 1]);
-            get_width(sp);
+            check_width(sp);
             sp->x++;
         }
         sp->rtn++;
@@ -79,7 +88,7 @@ int			parse(const char *format, t_whole *sp)
 {
     sp->x = 0;
     sp->rtn = 0;
-    while (format[sp->x] != '\0')
+    while (format[sp->x])
     {
         if (format[sp->x] != '%')
         {
@@ -88,10 +97,11 @@ int			parse(const char *format, t_whole *sp)
         }
         if (format[sp->x] == '%')
         {
-            if (format[sp->x] != '\0' && format[sp->x + 1] == 'n')
+            if (format[sp->x + 1] == 'n')
+            {
                 ft_putchar('\n');
-            if (format[sp->x] != '\0' && format[sp->x + 1] == '%')
-                ft_putchar('%');
+                sp->x++;
+            }
             //add # of chars to the end of rtn & return # of chars
             sp->rtn += ft_flags(format, sp);
             ft_zero(sp->ptr);

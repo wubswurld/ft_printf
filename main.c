@@ -15,9 +15,15 @@
 
 int		main()
 {
+	char c = 'a';
+	int x = 100;
 	char *str;
-	str = "abcdefhi";
-	ft_printf("[%8s]\n", str);
-	printf("[%8s]\n", str);
+	str = "babs";
+	printf("[real: %d]\n", x);
+	ft_printf("[%d]\n", x);
+	ft_printf("[%s]\n", str);
+	ft_printf("[%7s]\n", str);
+	printf("[real: %-5s]\n", str);
+	ft_printf("[this is %s, i am %d years old and my name starts with %c]", str, x, c);
 	return (0);
 }

@@ -12,18 +12,6 @@
 
 #include "ft_printf.h"
 
-void    ft_zero(t_adds *ptr)
-{
-    ptr->plus = 0;
-    ptr->minus = 0;
-    ptr->width = 0;
-    ptr->precision = 0;
-    ptr->zero = 0;
-    ptr->space = 0;
-    ptr->len = 0;
-    ptr->hash = 0;
-}
-
 int         check_digit(t_whole *sp)
 {
     int     arr;
@@ -31,9 +19,32 @@ int         check_digit(t_whole *sp)
     arr = va_arg(sp->arg, int);
     if (arr)
         ft_putnbr(arr);
+    if (arr == 0)
+        ft_putnbr(0);
     sp->rtn += num_len(arr);
     return (sp->rtn);
 }
+int        check_char(t_whole *sp)
+{  
+    if (sp->ptr->tmp == 'c')
+    {
+        ft_putchar(va_arg(sp->arg, int));
+        sp->rtn += 1;
+    }
+    if (sp->ptr->tmp == 'C')
+    {
+        ft_putchar(ft_toupper(va_arg(sp->arg, int)));
+        sp->rtn += 1;   
+    }
+    return (sp->rtn);
+}
+// void        check_hex(t_whole *sp)
+// {
+//     if (sp->ptr->tmp == 'x')
+//     {
+//        ft_itoa_base()
+//     }
+// }
 
 int         check_str(t_whole *sp)
 {
@@ -42,6 +53,7 @@ int         check_str(t_whole *sp)
 
     x = 0;
     tp = va_arg(sp->arg, char *);
+    printf("%d\n", ft_strlen(tp));
     if (tp != '\0')
     {
         ft_putstr(&tp[x]);
@@ -55,3 +67,36 @@ int         check_str(t_whole *sp)
     sp->rtn += x;
     return (sp->rtn);
 }
+
+// int         check_str(t_whole *sp)
+// {
+//     if (sp->tp != '\0')
+//     {
+//         if (sp->ptr->width == FALSE)
+//             ft_putstr(&sp->tp[x]);
+//         if (sp->ptr->width == TRUE)
+//         {
+//             get_width(sp);
+//             ft_putstr(&sp->tp[x]);
+//         }
+//     }
+//     sp->rtn += x;
+//     return (sp->rtn);
+// }
+
+// int         check_str(t_whole *sp)
+// {
+//     if (sp->tp != '\0')
+//     {
+//         if (sp->ptr->width == FALSE)
+//             ft_putstr(&sp->tp[x]);
+//         if (sp->ptr->width == TRUE)
+//         {
+//             get_width(sp);
+//             ft_putstr(&sp->tp[x]);
+//         }
+//     }
+//     sp->rtn += x;
+//     return (sp->rtn);
+// }
+

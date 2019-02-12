@@ -13,32 +13,33 @@
 
 NAME = libftprintf.a
 
-CFILES = ft_printf.c ft_extra.c ex.c main.c
+CFILES = ft_printf.c ft_extra.c ex.c basic.c mostbasic.c
 
-EX = main.c
+FLAGS = -Wall -Wextra -Werror
 
-OFILES = *.o
+OBJS = *.o
 
-CFLAGS = -Wall -Werror -Wextra
-
-CC = gcc
-
-HEADER = ft_printf.h
+EX = ft_printf
 
 all: $(NAME)
 
-$(OFILES):$(CFILES)
-	@$(CC) $(CFLAGS) -I $(HEADER) -c $(CFILES)
+$(NAME):
+	@echo "\033[32mCompiling source files\033[0m"
+	@gcc $(FLAGS) -c $(CFILES) 
+	@ar rcs $(NAME) $(OBJS)
+	@ranlib $(NAME)
 
-$(NAME):$(OFILES)
-	@ar rcs $(NAME) $(OFILES)
-
-clean: 
-	@rm -rf $(OFILES)
+clean:
+	@echo "\033[32mCleaning up\033[0m"
+	@rm -rf $(OBJS)
 
 fclean: clean
+	@echo "\033[32mFull clean\033[0m"
 	@rm -rf $(NAME)
+	@rm -rf $(EX)
+
+test: re
+
+	@$(CC) $(FLAGS) main.c -L. -lftprintf -o $(EX)
 
 re: fclean all
-	
-.PHONY: clean fclean make re all
