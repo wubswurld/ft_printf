@@ -41,15 +41,24 @@ int        check_flags(t_whole *sp)
     return (sp->rtn); 
 }
 
-int         check_width(t_whole *sp)
+int         get_width(t_whole *sp)
 {
-    sp->a = 0;
-    while (sp->a < sp->ptr->width)
+    while (sp->ptr->width > 1)
     {
-       ft_putchar(' ');
-       sp->a++;
+        if (sp->ptr->zero == FALSE)
+        {
+            ft_putchar(' ');
+            sp->rtn += 1;
+        }
+        sp->ptr->width -= 1;
     }
-    sp->rtn += sp->a;
+    // while (sp->ptr->width-- > 1)
+	// {
+	// 	if (sp->ptr->zero == FALSE)
+	// 	{
+	// 	     write(1, " ", 1);
+	// 	}
+    // }
     return (sp->rtn);
 }
 
@@ -75,7 +84,7 @@ int         ft_flags(const char *format, t_whole *sp)
         if (ft_isdigit(format[sp->x + 1]) && format[sp->x])
         {
             sp->ptr->width = ft_atoi(&format[sp->x + 1]);
-            check_width(sp);
+            //check_width(sp);
             sp->x++;
         }
         sp->rtn++;

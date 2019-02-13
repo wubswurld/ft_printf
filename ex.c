@@ -30,10 +30,15 @@ int        check_char(t_whole *sp)
     
     post = va_arg(sp->arg, int);
     sp->output = &post;
-    if (sp->ptr->tmp == 'c' && sp->ptr->width == FALSE && sp->ptr->minus == FALSE)
+    if (sp->ptr->tmp == 'c' && sp->ptr->minus == FALSE)
+    {
+        get_width(sp);
+        ft_putchar(*sp->output);
+    }
+    if (sp->ptr->tmp == 'c' && sp->ptr->minus == TRUE)
     {
         ft_putchar(*sp->output);
-        sp->rtn += 1;
+        get_width(sp);
     }
     return (sp->rtn);
 }
@@ -45,27 +50,21 @@ int        check_char(t_whole *sp)
 //     }
 // }
 
-int         check_str(t_whole *sp)
+void         check_str(t_whole *sp)
 {
-    int    x;
     char *tp;
 
-    x = 0;
     tp = va_arg(sp->arg, char *);
     sp->output = ft_strdup((char *)tp);
-    if (sp->ptr->tmp == 's' && sp->ptr->width == FALSE)
+    // if (sp->ptr->tmp == 's' && sp->ptr->width == FALSE)
+    //     ft_putstr(sp->output);
+    if (sp->ptr->tmp == 's' && sp->ptr->minus == FALSE)
     {
-        //ft_putstr(sp->output);
-        ft_putstr(&tp[x]);
-        x++;
+        get_width(sp);
+        ft_putstr(sp->output);
     }
     else
-    {
         ft_putstr("(null)");
-        x++;
-    }
-    sp->rtn += x;
-    return (sp->rtn);
 }
 
 // int         check_str(t_whole *sp)

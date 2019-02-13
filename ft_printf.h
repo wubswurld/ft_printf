@@ -44,7 +44,7 @@ typedef struct s_adds
 typedef	struct s_whole
 {
 	int		x;
-	int 	a;
+	int		a;
 	int		rtn;
 	char	*output;
 	va_list arg;
@@ -56,7 +56,7 @@ int			ft_printf(const char *format, ...);
 int			parse(const char *format, t_whole *sp);
 // add funcs
 int         ft_flags(const char *format, t_whole *sp);
-int         check_str(t_whole *sp);
+void         check_str(t_whole *sp);
 int         check_digit(t_whole *sp);
 int         get_width(t_whole *sp);
 void        check_hex(t_whole *sp);
