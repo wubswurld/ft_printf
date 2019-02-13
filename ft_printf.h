@@ -47,7 +47,6 @@ typedef	struct s_whole
 	int 	a;
 	int		rtn;
 	char	*output;
-	char 	*tp;
 	va_list arg;
 	t_adds	*ptr;
 }				t_whole;

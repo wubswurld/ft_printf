@@ -26,15 +26,14 @@ int         check_digit(t_whole *sp)
 }
 int        check_char(t_whole *sp)
 {  
-    if (sp->ptr->tmp == 'c')
+    char post;
+    
+    post = va_arg(sp->arg, int);
+    sp->output = &post;
+    if (sp->ptr->tmp == 'c' && sp->ptr->width == FALSE && sp->ptr->minus == FALSE)
     {
-        ft_putchar(va_arg(sp->arg, int));
+        ft_putchar(*sp->output);
         sp->rtn += 1;
-    }
-    if (sp->ptr->tmp == 'C')
-    {
-        ft_putchar(ft_toupper(va_arg(sp->arg, int)));
-        sp->rtn += 1;   
     }
     return (sp->rtn);
 }
@@ -53,9 +52,10 @@ int         check_str(t_whole *sp)
 
     x = 0;
     tp = va_arg(sp->arg, char *);
-    printf("%d\n", ft_strlen(tp));
-    if (tp != '\0')
+    sp->output = ft_strdup((char *)tp);
+    if (sp->ptr->tmp == 's' && sp->ptr->width == FALSE)
     {
+        //ft_putstr(sp->output);
         ft_putstr(&tp[x]);
         x++;
     }
