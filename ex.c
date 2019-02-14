@@ -24,18 +24,23 @@ int         check_digit(t_whole *sp)
     sp->rtn += num_len(arr);
     return (sp->rtn);
 }
-int        check_char(t_whole *sp)
+void      check_char(t_whole *sp)
 {  
     char post;
     
     post = va_arg(sp->arg, int);
     sp->output = &post;
-    if (sp->ptr->tmp == 'c' && sp->ptr->width == FALSE && sp->ptr->minus == FALSE)
+    if (sp->ptr->tmp == 'c' && sp->ptr->minus == FALSE)
+    {
+        get_width(sp);
+        ft_putchar(*sp->output);
+    }
+    if (sp->ptr->tmp == 'c' && sp->ptr->minus == TRUE)
     {
         ft_putchar(*sp->output);
-        sp->rtn += 1;
+        get_width(sp);
     }
-    return (sp->rtn);
+    //return (sp->rtn);
 }
 // void        check_hex(t_whole *sp)
 // {

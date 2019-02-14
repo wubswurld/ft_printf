@@ -44,7 +44,7 @@ typedef struct s_adds
 typedef	struct s_whole
 {
 	int		x;
-	int 	a;
+	int		a;
 	int		rtn;
 	char	*output;
 	va_list arg;
@@ -58,10 +58,17 @@ int			parse(const char *format, t_whole *sp);
 int         ft_flags(const char *format, t_whole *sp);
 int         check_str(t_whole *sp);
 int         check_digit(t_whole *sp);
-int         get_width(t_whole *sp);
+void       	get_width(t_whole *sp);
 void        check_hex(t_whole *sp);
 void		numcount(const char *format, t_whole *sp);
-int	        check_char(t_whole *sp);
+void	    check_char(t_whole *sp);
+// boolean funcs
+void    	ft_minus(const char *format, t_whole *sp);
+void    	ft_plus(const char *format, t_whole *sp);
+void    	ft_setzero(const char *format, t_whole *sp);
+void    	ft_hash(const char *format, t_whole *sp);
+void    	ft_space(const char *format, t_whole *sp);
+void        ft_width(const char *format, t_whole *sp);
 //libft/helpers
 void		ft_putchar(char c);
 void    	ft_putstr(char *str);

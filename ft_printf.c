@@ -29,27 +29,15 @@ int        check_flags(t_whole *sp)
     if (sp->ptr->tmp)
     {
       if (sp->ptr->tmp == 'c')
-          check_char(sp); 
+        check_char(sp); 
       if (sp->ptr->tmp == 's')
-          check_str(sp);
+        check_str(sp);
       if (sp->ptr->tmp == 'd' || sp->ptr->tmp == 'i')
-          check_digit(sp);
+        check_digit(sp);
         sp->x++;
     }
     //   if (sp->ptr->tmp == 'x' || sp->ptr->tmp == 'X')
     //       check_hex(sp);
-    return (sp->rtn); 
-}
-
-int         check_width(t_whole *sp)
-{
-    sp->a = 0;
-    while (sp->a < sp->ptr->width)
-    {
-       ft_putchar(' ');
-       sp->a++;
-    }
-    sp->rtn += sp->a;
     return (sp->rtn);
 }
 
@@ -58,26 +46,19 @@ int         ft_flags(const char *format, t_whole *sp)
     if (!mod_strchr(format[sp->x], "sSpdDioOUxXcC") && format[sp->x])
     {
         if (format[sp->x] != '\0' && format[sp->x + 1] == '-')
-        {    
-            sp->ptr->minus = 1;
-            sp->x++;
-        }
+            ft_minus(format, sp);
         if (format[sp->x + 1] == '+' && format[sp->x] != '\0')
-            sp->ptr->plus = 1;
+            ft_plus(format, sp);
         if (format[sp->x + 1] == '0' && format[sp->x + 1] != '\0')
-            sp->ptr->zero = 1;
+            ft_setzero(format, sp);
         if (format[sp->x + 1] == '#' && format[sp->x + 1] != '\0')
-            sp->ptr->hash = 1;
+            ft_hash(format, sp);
         if (format[sp->x + 1] == ' ' && format[sp->x + 1] != '\0')
-            sp->ptr->space = 1;
+            ft_space(format, sp);
         if (format[sp->x + 1] == '.' && format[sp->x + 1] != '\0')
             sp->ptr->precision = 1;    
         if (ft_isdigit(format[sp->x + 1]) && format[sp->x])
-        {
-            sp->ptr->width = ft_atoi(&format[sp->x + 1]);
-            check_width(sp);
-            sp->x++;
-        }
+            ft_width(format, sp);
         sp->rtn++;
     }
     sp->ptr->tmp = format[sp->x + 1];
@@ -97,11 +78,6 @@ int			parse(const char *format, t_whole *sp)
         }
         if (format[sp->x] == '%')
         {
-            if (format[sp->x + 1] == 'n')
-            {
-                ft_putchar('\n');
-                sp->x++;
-            }
             //add # of chars to the end of rtn & return # of chars
             sp->rtn += ft_flags(format, sp);
             ft_zero(sp->ptr);
