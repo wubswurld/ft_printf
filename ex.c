@@ -50,7 +50,7 @@ void      check_char(t_whole *sp)
 //     }
 // }
 
-int         check_str(t_whole *sp)
+void         check_str(t_whole *sp)
 {
     int    x;
     char *tp;
@@ -58,19 +58,16 @@ int         check_str(t_whole *sp)
     x = 0;
     tp = va_arg(sp->arg, char *);
     sp->output = ft_strdup((char *)tp);
-    if (sp->ptr->tmp == 's' && sp->ptr->width == FALSE)
+    if (sp->ptr->tmp == 's' && sp->ptr->minus == FALSE)
     {
-        //ft_putstr(sp->output);
-        ft_putstr(&tp[x]);
-        x++;
+        str_width(sp);
+        ft_putstr(sp->output);
     }
-    else
+    if (sp->ptr->tmp == 's' && sp->ptr->minus == TRUE)
     {
-        ft_putstr("(null)");
-        x++;
+        ft_putstr(sp->output);
+        str_width(sp);
     }
-    sp->rtn += x;
-    return (sp->rtn);
 }
 
 // int         check_str(t_whole *sp)

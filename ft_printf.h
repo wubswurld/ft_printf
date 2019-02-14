@@ -56,9 +56,10 @@ int			ft_printf(const char *format, ...);
 int			parse(const char *format, t_whole *sp);
 // add funcs
 int         ft_flags(const char *format, t_whole *sp);
-int         check_str(t_whole *sp);
+void        check_str(t_whole *sp);
 int         check_digit(t_whole *sp);
 void       	get_width(t_whole *sp);
+void        str_width(t_whole *sp);
 void        check_hex(t_whole *sp);
 void		numcount(const char *format, t_whole *sp);
 void	    check_char(t_whole *sp);

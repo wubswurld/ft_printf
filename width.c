@@ -16,14 +16,9 @@ void        ft_width(const char *format, t_whole *sp)
 {
     if (format[sp->x] != '\0' && ft_isdigit(format[sp->x + 1]))
     {
-        sp->ptr->width = ft_atoi(&format[sp->x + 1]);
+        sp->ptr->width += ft_atoi(&format[sp->x + 1]);
         sp->x++;
     }
-    if (ft_isdigit(format[sp->x + 2] && sp->a < ft_isdigit(format[sp->x + 2])))
-    {
-        sp->a++;
-    }
-    sp->ptr->width += sp->a;
 }
 
 void         get_width(t_whole *sp)
@@ -36,5 +31,21 @@ void         get_width(t_whole *sp)
             ft_putchar('0');
         sp->ptr->width--;
     }
+}
+
+void        str_width(t_whole *sp)
+{
+    int x;
+
+    x = ft_strlen(sp->output);
+    while (sp->ptr->width > x)
+    {
+        if (sp->ptr->zero == FALSE)
+            ft_putchar(' ');
+        if (sp->ptr->zero == TRUE)
+            ft_putchar('0');
+        sp->ptr->width--;
+    }
+
 }
 

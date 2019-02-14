@@ -35,7 +35,7 @@ int     ft_strlen(char *str)
 
     x = 0;
     while (str[x])
-        return (x++);
+        x++;
     return (x);
 }
 

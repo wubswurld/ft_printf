@@ -21,16 +21,20 @@ int		main()
 	str = "babs";
 	printf("[real -2 width: %-2c]\n", c);
 	printf("[real: %-c]\n", c);
+	printf("[%2c]\n", c);
+	ft_printf("[%2c]\n", c);
+	ft_printf("[%-2c]\n", c);
 	ft_printf("[my neg char, no width: %-c]\n", c);
 	ft_printf("[my normal char: %c]\n", c);
+	printf("\n");
 	printf("[real: %d]\n", x);
 	ft_printf("[my int: %d]\n", x);
+	printf("\n");
 	ft_printf("[my string: %s]\n", str);
 	ft_printf("[my str twice: %s, %s]\n", str, str);
-	printf("[real: %s]\n", str);
-	ft_printf("[this is %s, i am %d years old and my name starts with %c]\n", str, x, c);
-	printf("[%20c]\n", c);
-	ft_printf("[%1c]\n", c);
-	ft_printf("[%-1c]\n", c);
+	printf("[%-5s]\n", str);
+	ft_printf("[%-5s]\n", str);
+	ft_printf("[%05s]", str);
+	printf("[%5s]", str);
 	return (0);
 }
