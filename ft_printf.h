@@ -60,6 +60,7 @@ void        check_str(t_whole *sp);
 int         check_digit(t_whole *sp);
 void       	get_width(t_whole *sp);
 void        str_width(t_whole *sp);
+void    	per_width(t_whole *sp);
 void        check_hex(t_whole *sp);
 void		numcount(const char *format, t_whole *sp);
 void	    check_char(t_whole *sp);
@@ -70,6 +71,8 @@ void    	ft_setzero(const char *format, t_whole *sp);
 void    	ft_hash(const char *format, t_whole *sp);
 void    	ft_space(const char *format, t_whole *sp);
 void        ft_width(const char *format, t_whole *sp);
+void      	check_per(t_whole *sp);
+void    	ft_star(const char *format, t_whole *sp);
 //libft/helpers
 void		ft_putchar(char c);
 void    	ft_putstr(char *str);

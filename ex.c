@@ -24,6 +24,21 @@ int         check_digit(t_whole *sp)
     sp->rtn += num_len(arr);
     return (sp->rtn);
 }
+
+void      check_per(t_whole *sp)
+{
+    if (sp->ptr->tmp == '%' && sp->ptr->minus == FALSE)
+    {
+        per_width(sp);    
+        ft_putchar('%');
+    }
+    if (sp->ptr->tmp == '%' && sp->ptr->minus == TRUE)
+    {
+        ft_putchar('%');
+        per_width(sp);
+    }
+}
+
 void      check_char(t_whole *sp)
 {  
     char post;
@@ -40,15 +55,25 @@ void      check_char(t_whole *sp)
         ft_putchar(*sp->output);
         get_width(sp);
     }
-    //return (sp->rtn);
 }
-// void        check_hex(t_whole *sp)
-// {
-//     if (sp->ptr->tmp == 'x')
-//     {
-//        ft_itoa_base()
-//     }
-// }
+void        check_hex(t_whole *sp)
+{
+    int post;
+
+    post = va_arg(sp->arg, int);
+    if (sp->ptr->tmp == 'x' && sp->ptr->minus == FALSE)
+    {
+        sp->output = ft_itoa_base(post, 16);
+        str_width(sp);
+        ft_putstr(sp->output);
+    }
+    if (sp->ptr->tmp == 'x' && sp->ptr->minus == TRUE)
+    {
+        sp->output = ft_itoa_base(post, 16);
+        ft_putstr(sp->output);
+        str_width(sp);
+    }
+}
 
 void         check_str(t_whole *sp)
 {

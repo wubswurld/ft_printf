@@ -49,3 +49,27 @@ void        str_width(t_whole *sp)
 
 }
 
+void    per_width(t_whole *sp)
+{
+    while (sp->ptr->width > 1)
+    {
+        if (sp->ptr->zero == FALSE)
+            ft_putchar(' ');
+        if (sp->ptr->zero == TRUE)
+            ft_putchar('0');
+        sp->ptr->width--;
+    }
+}
+
+void    ft_star(const char *format, t_whole *sp)
+{
+    int post;
+
+    post = va_arg(sp->arg, int);
+    if (format[sp->x + 1] == '*' && format[sp->x + 1] != '\0')
+    {
+        sp->ptr->width += post;
+        sp->x++;
+    }
+}
+

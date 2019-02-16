@@ -34,15 +34,20 @@ int        check_flags(t_whole *sp)
         check_str(sp);
       if (sp->ptr->tmp == 'd' || sp->ptr->tmp == 'i')
         check_digit(sp);
+      if (sp->ptr->tmp == '%')
+        check_per(sp);
+      if (sp->ptr->tmp == 'x')
+        check_hex(sp);
         sp->x++;
     }
-    //   if (sp->ptr->tmp == 'x' || sp->ptr->tmp == 'X')
-    //       check_hex(sp);
     return (sp->rtn);
 }
 
 int         ft_flags(const char *format, t_whole *sp)
 {
+    int p;
+
+    p = 0;
     if (!mod_strchr(format[sp->x], "sSpdDioOUxXcC") && format[sp->x])
     {
         if (format[sp->x] != '\0' && format[sp->x + 1] == '-')
@@ -55,8 +60,10 @@ int         ft_flags(const char *format, t_whole *sp)
             ft_hash(format, sp);
         if (format[sp->x + 1] == ' ' && format[sp->x + 1] != '\0')
             ft_space(format, sp);
-        if (format[sp->x + 1] == '.' && format[sp->x + 1] != '\0')
-            sp->ptr->precision = 1;    
+        if (format[sp->x + 1] == '*' && format[sp->x + 1] != '\0')
+            ft_star(format, sp);
+        // if (format[sp->x + 1] == '.' && format[sp->x + 1] != '\0')
+        //     ft_prec(format, sp);    
         if (ft_isdigit(format[sp->x + 1]) && format[sp->x])
             ft_width(format, sp);
         sp->rtn++;
