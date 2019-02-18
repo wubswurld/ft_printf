@@ -12,17 +12,21 @@
 
 #include "ft_printf.h"
 
-int         check_digit(t_whole *sp)
+void         check_digit(t_whole *sp)
 {
-    int     arr;
-
-    arr = va_arg(sp->arg, int);
-    if (arr)
-        ft_putnbr(arr);
-    if (arr == 0)
-        ft_putnbr(0);
-    sp->rtn += num_len(arr);
-    return (sp->rtn);
+    sp->arr = va_arg(sp->arg, int);
+    if ((sp->ptr->tmp == 'd' || sp->ptr->tmp == 'i') && sp->ptr->minus == FALSE)
+    {
+        int_width(sp);
+        if (sp->ptr->plus == TRUE)
+            ft_putchar('+');
+        ft_putnbr(sp->arr);
+    }
+      if ((sp->ptr->tmp == 'd' || sp->ptr->tmp == 'i') && sp->ptr->minus == TRUE)
+    {
+        ft_putnbr(sp->arr);
+        int_width(sp);
+    }
 }
 
 void      check_per(t_whole *sp)
@@ -41,10 +45,10 @@ void      check_per(t_whole *sp)
 
 void      check_char(t_whole *sp)
 {  
-    char post;
+    char pst;
     
-    post = va_arg(sp->arg, int);
-    sp->output = &post;
+    pst = va_arg(sp->arg, int);
+    sp->output = &pst;
     if (sp->ptr->tmp == 'c' && sp->ptr->minus == FALSE)
     {
         get_width(sp);
@@ -58,20 +62,22 @@ void      check_char(t_whole *sp)
 }
 void        check_hex(t_whole *sp)
 {
-    int post;
-
-    post = va_arg(sp->arg, int);
+    sp->post = va_arg(sp->arg, int);
     if (sp->ptr->tmp == 'x' && sp->ptr->minus == FALSE)
     {
-        sp->output = ft_itoa_base(post, 16);
-        str_width(sp);
+        sp->output = ft_itoa_base(sp->post, 16);
+        hex_width(sp);
+        if (sp->ptr->hash == TRUE)
+            write(1, "0x", 2);
         ft_putstr(sp->output);
     }
     if (sp->ptr->tmp == 'x' && sp->ptr->minus == TRUE)
     {
-        sp->output = ft_itoa_base(post, 16);
+        sp->output = ft_itoa_base(sp->post, 16);
+        if (sp->ptr->hash == TRUE)
+            write(1, "0x", 2);
         ft_putstr(sp->output);
-        str_width(sp);
+        hex_width(sp);
     }
 }
 
@@ -94,36 +100,4 @@ void         check_str(t_whole *sp)
         str_width(sp);
     }
 }
-
-// int         check_str(t_whole *sp)
-// {
-//     if (sp->tp != '\0')
-//     {
-//         if (sp->ptr->width == FALSE)
-//             ft_putstr(&sp->tp[x]);
-//         if (sp->ptr->width == TRUE)
-//         {
-//             get_width(sp);
-//             ft_putstr(&sp->tp[x]);
-//         }
-//     }
-//     sp->rtn += x;
-//     return (sp->rtn);
-// }
-
-// int         check_str(t_whole *sp)
-// {
-//     if (sp->tp != '\0')
-//     {
-//         if (sp->ptr->width == FALSE)
-//             ft_putstr(&sp->tp[x]);
-//         if (sp->ptr->width == TRUE)
-//         {
-//             get_width(sp);
-//             ft_putstr(&sp->tp[x]);
-//         }
-//     }
-//     sp->rtn += x;
-//     return (sp->rtn);
-// }
 

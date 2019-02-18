@@ -46,6 +46,8 @@ typedef	struct s_whole
 	int		x;
 	int		a;
 	int		rtn;
+	int     arr;
+	int 	post;
 	char	*output;
 	va_list arg;
 	t_adds	*ptr;
@@ -57,13 +59,14 @@ int			parse(const char *format, t_whole *sp);
 // add funcs
 int         ft_flags(const char *format, t_whole *sp);
 void        check_str(t_whole *sp);
-int         check_digit(t_whole *sp);
+void        check_digit(t_whole *sp);
 void       	get_width(t_whole *sp);
 void        str_width(t_whole *sp);
 void    	per_width(t_whole *sp);
 void        check_hex(t_whole *sp);
-void		numcount(const char *format, t_whole *sp);
 void	    check_char(t_whole *sp);
+void        hex_width(t_whole *sp);
+void     	int_width(t_whole *sp);
 // boolean funcs
 void    	ft_minus(const char *format, t_whole *sp);
 void    	ft_plus(const char *format, t_whole *sp);
@@ -73,6 +76,7 @@ void    	ft_space(const char *format, t_whole *sp);
 void        ft_width(const char *format, t_whole *sp);
 void      	check_per(t_whole *sp);
 void    	ft_star(const char *format, t_whole *sp);
+void        check_bighex(t_whole *sp);
 //libft/helpers
 void		ft_putchar(char c);
 void    	ft_putstr(char *str);
@@ -89,7 +93,8 @@ int			ft_atoi(const char *str);
 int			ft_toupper(int c);
 char		*ft_itoa_base(int val, int base);
 int			ft_isdigit(int c);
+char		*ft_itoa_bigbase(int val, int base);
 //initialize
-void    ft_zero(t_adds *ptr);
+void    	ft_zero(t_adds *ptr);
 
 #endif

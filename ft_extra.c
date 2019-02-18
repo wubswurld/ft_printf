@@ -106,21 +106,22 @@ char	*ft_itoa_base(int val, int base)
 {
 	// max base of 16 is = to 0123456789abcdef
 	static char tmp[] = "0123456789abcdef";
-	static char buf[65];
+	static char buf;
 	char		*ptr;
 
-	ptr = &buf[64];
+	ptr = &buf;
 	*ptr = '\0';
-	if (val < 0 && base == 10)
+	if (val <= 0)
 		val = val * -1;
 	if (val == 0)
+	{	
 		*--ptr = tmp[val % base];
+		val = val / base;
+	}
 	while (val != 0)
 	{
 		*--ptr = tmp[val % base];
 		val = val / base;
 	}
-	if (val < 0)
-		*--ptr = '-';
 	return (ptr);
 }

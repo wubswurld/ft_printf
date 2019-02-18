@@ -14,10 +14,11 @@
 
 void        ft_width(const char *format, t_whole *sp)
 {
-    if (format[sp->x] != '\0' && ft_isdigit(format[sp->x + 1]))
+    if (format[sp->x] != '\0' && format[sp->x + 1] >= '1' && format[sp->x +1] <= '9')
     {
         sp->ptr->width += ft_atoi(&format[sp->x + 1]);
-        sp->x++;
+        while (format[sp->x + 1] >= '0' && format[sp->x + 1] <= '9')
+            ++sp->x;
     }
 }
 
@@ -49,9 +50,14 @@ void        str_width(t_whole *sp)
 
 }
 
-void    per_width(t_whole *sp)
+void        hex_width(t_whole *sp)
 {
-    while (sp->ptr->width > 1)
+    int a;
+
+    a = ft_strlen(sp->output);
+    if (sp->ptr->hash == TRUE)
+        sp->ptr->width = sp->ptr->width - 2;
+    while (sp->ptr->width > a)
     {
         if (sp->ptr->zero == FALSE)
             ft_putchar(' ');
@@ -61,15 +67,15 @@ void    per_width(t_whole *sp)
     }
 }
 
-void    ft_star(const char *format, t_whole *sp)
+void    per_width(t_whole *sp)
 {
-    int post;
-
-    post = va_arg(sp->arg, int);
-    if (format[sp->x + 1] == '*' && format[sp->x + 1] != '\0')
+    while (sp->ptr->width > 1)
     {
-        sp->ptr->width += post;
-        sp->x++;
+        if (sp->ptr->zero == FALSE)
+            ft_putchar(' ');
+        if (sp->ptr->zero == TRUE)
+            ft_putchar('0');
+        sp->ptr->width--;
     }
 }
 

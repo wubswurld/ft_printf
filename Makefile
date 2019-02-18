@@ -13,7 +13,7 @@
 
 NAME = libftprintf.a
 
-CFILES = ft_printf.c ft_extra.c ex.c basic.c mostbasic.c bool.c width.c
+CFILES = ft_printf.c ft_extra.c ex.c basic.c mostbasic.c bool.c width.c morefunctions.c
 
 FLAGS = -Wall -Wextra -Werror
 

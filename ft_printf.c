@@ -28,16 +28,18 @@ int        check_flags(t_whole *sp)
 {
     if (sp->ptr->tmp)
     {
-      if (sp->ptr->tmp == 'c')
-        check_char(sp); 
-      if (sp->ptr->tmp == 's')
-        check_str(sp);
-      if (sp->ptr->tmp == 'd' || sp->ptr->tmp == 'i')
-        check_digit(sp);
-      if (sp->ptr->tmp == '%')
-        check_per(sp);
-      if (sp->ptr->tmp == 'x')
-        check_hex(sp);
+        if (sp->ptr->tmp == 'c')
+            check_char(sp); 
+        if (sp->ptr->tmp == 's')
+            check_str(sp);
+        if (sp->ptr->tmp == 'd' || sp->ptr->tmp == 'i')
+            check_digit(sp);
+        if (sp->ptr->tmp == '%')
+            check_per(sp);
+        if (sp->ptr->tmp == 'x')
+            check_hex(sp);
+        if (sp->ptr->tmp == 'X')
+            check_bighex(sp);
         sp->x++;
     }
     return (sp->rtn);
@@ -45,9 +47,6 @@ int        check_flags(t_whole *sp)
 
 int         ft_flags(const char *format, t_whole *sp)
 {
-    int p;
-
-    p = 0;
     if (!mod_strchr(format[sp->x], "sSpdDioOUxXcC") && format[sp->x])
     {
         if (format[sp->x] != '\0' && format[sp->x + 1] == '-')
