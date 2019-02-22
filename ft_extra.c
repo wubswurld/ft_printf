@@ -33,11 +33,11 @@ char	*ft_strdup(const char *s1)
 	char	*tmp;
 
 	a = 0;
+	x = 0;
 	while (s1[a])
 		a++;
 	if (!(tmp = (char *)malloc(sizeof(*tmp) * (a + 1))))
-		return (NULL);
-	x = 0;
+		ft_strdel(&tmp);
 	while (s1[x] != '\0')
 	{
 		tmp[x] = s1[x];
@@ -45,34 +45,6 @@ char	*ft_strdup(const char *s1)
 	}
 	tmp[x] = '\0';
 	return (tmp);
-}
-
-char	*ft_itoa(int nbr)
-{
-	char	*str;
-	int		neg;
-	int		x;
-
-	x = ft_nbr_len(nbr);
-	neg = 0;
-	if (nbr == -2147483648)
-		return (str = ft_strdup("-2147483648"));
-	if (!(str = ft_strnew(x + 1)))
-		return (NULL);
-	if (nbr < 0)
-	{
-		neg = 1;
-		str[0] = '-';
-		nbr *= -1;
-	}
-	while (x >= neg)
-	{
-		str[x] = (nbr % 10) + 48;
-		nbr /= 10;
-		x--;
-	}
-	str[ft_strlen(str)] = '\0';
-	return (str);
 }
 
 int		ft_atoi(const char *str)
@@ -102,7 +74,7 @@ int		ft_atoi(const char *str)
 	return (num * neg);
 }
 
-char	*ft_itoa_base(int val, int base)
+char	*ft_uitoa_base(unsigned int val, int base)
 {
 	// max base of 16 is = to 0123456789abcdef
 	static char tmp[] = "0123456789abcdef";
@@ -111,8 +83,6 @@ char	*ft_itoa_base(int val, int base)
 
 	ptr = &buf;
 	*ptr = '\0';
-	if (val <= 0)
-		val = val * -1;
 	if (val == 0)
 	{	
 		*--ptr = tmp[val % base];
@@ -125,3 +95,23 @@ char	*ft_itoa_base(int val, int base)
 	}
 	return (ptr);
 }
+
+char	*ft_uitoa_bigbase(unsigned int val, int base)
+{
+	// max base of 16 is = to 0123456789abcdef
+	static char tmp[] = "0123456789ABCDEF";
+	static char buf[65];
+	char		*ptr;
+
+	ptr = &buf[64];
+	*ptr = '\0';
+	if (val == 0)
+		*--ptr = tmp[val % base];
+	while (val != 0)
+	{
+		*--ptr = tmp[val % base];
+		val = val / base;
+	}
+	return (ptr);
+}
+

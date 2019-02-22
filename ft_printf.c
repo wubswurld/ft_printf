@@ -40,6 +40,12 @@ int        check_flags(t_whole *sp)
             check_hex(sp);
         if (sp->ptr->tmp == 'X')
             check_bighex(sp);
+        if (sp->ptr->tmp == 'o')
+            check_octal(sp);
+        if (sp->ptr->tmp == 'p')
+            check_point(sp);
+        // if (sp->ptr->tmp == 'u')
+        //     check_unsigned(sp);
         sp->x++;
     }
     return (sp->rtn);

@@ -56,44 +56,47 @@ typedef	struct s_whole
 //main func
 int			ft_printf(const char *format, ...);
 int			parse(const char *format, t_whole *sp);
-// add funcs
 int         ft_flags(const char *format, t_whole *sp);
+// add funcs
 void        check_str(t_whole *sp);
 void        check_digit(t_whole *sp);
-void       	get_width(t_whole *sp);
-void        str_width(t_whole *sp);
-void    	per_width(t_whole *sp);
 void        check_hex(t_whole *sp);
 void	    check_char(t_whole *sp);
-void        hex_width(t_whole *sp);
+void    	check_octal(t_whole *sp);
+void      	check_per(t_whole *sp);
+void        check_bighex(t_whole *sp);
+void        check_unsigned(t_whole *sp);
+//width
+void        ft_width(const char *format, t_whole *sp);
+void        oct_width(t_whole *sp);
 void     	int_width(t_whole *sp);
+void    	per_width(t_whole *sp);
+void       	get_width(t_whole *sp);
+void        str_width(t_whole *sp);
+void        hex_width(t_whole *sp);
 // boolean funcs
 void    	ft_minus(const char *format, t_whole *sp);
 void    	ft_plus(const char *format, t_whole *sp);
 void    	ft_setzero(const char *format, t_whole *sp);
 void    	ft_hash(const char *format, t_whole *sp);
 void    	ft_space(const char *format, t_whole *sp);
-void        ft_width(const char *format, t_whole *sp);
-void      	check_per(t_whole *sp);
 void    	ft_star(const char *format, t_whole *sp);
-void        check_bighex(t_whole *sp);
 //libft/helpers
+char		*ft_uitoa_base(unsigned int val, int base);
 void		ft_putchar(char c);
 void    	ft_putstr(char *str);
 int			mod_strchr(char c, char *s1);
 void		ft_putnbr(int n);
 int     	num_len(int c);
 int     	ft_strlen(char *str);
-char		*ft_itoa(int nbr);
 char		*ft_strnew(size_t n);
 char		*ft_strdup(const char *s1);
 void		*ft_memset(void *a, int b, size_t n);
 int			ft_nbr_len(int n);
 int			ft_atoi(const char *str);
-int			ft_toupper(int c);
-char		*ft_itoa_base(int val, int base);
 int			ft_isdigit(int c);
-char		*ft_itoa_bigbase(int val, int base);
+char		*ft_uitoa_bigbase(unsigned int val, int base);
+void		ft_strdel(char **as);
 //initialize
 void    	ft_zero(t_adds *ptr);
 

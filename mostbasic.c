@@ -12,14 +12,6 @@
 
 #include "ft_printf.h"
 
-int		ft_toupper(int c)
-{
-	if (c >= 'a' && c <= 'z')
-		return (c - 32);
-	else
-		return (c);
-}
-
 int		ft_nbr_len(int n)
 {
 	int neg;
@@ -70,4 +62,15 @@ int		ft_isdigit(int c)
 		return (1);
 	else
 		return (0);
+}
+
+void	ft_strdel(char **as)
+{
+	if (!as || !*as)
+		return ;
+	if (as)
+	{
+		free(*as);
+		*as = NULL;
+	}
 }
