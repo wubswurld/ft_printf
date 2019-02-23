@@ -44,8 +44,8 @@ int        check_flags(t_whole *sp)
             check_octal(sp);
         if (sp->ptr->tmp == 'p')
             check_point(sp);
-        // if (sp->ptr->tmp == 'u')
-        //     check_unsigned(sp);
+        if (sp->ptr->tmp == 'u')
+            check_unsigned(sp);
         sp->x++;
     }
     return (sp->rtn);

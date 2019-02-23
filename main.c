@@ -22,6 +22,8 @@ int		main()
 	char *str;
 	str = "babs";
 	printf("------CHAR-------\n\n");
+	printf("real: [%c]\n", 42);
+	ft_printf("mine: [%c]\n", 42);
 	printf("real -2 width: [%-2c]\n", c);
 	ft_printf("mine neg 2 width: [%-2c]\n", c);
 	printf("real -c: [%-c]\n", c);
@@ -85,7 +87,19 @@ int		main()
 	
 	printf("-----INTS USING I-------\n\n");
 	printf("real: [%i]\n", -2035065302);
-	ft_printf("mine: [%i]\n\n", -2035065302);
+	ft_printf("mine: [%i]\n", -2035065302);
+	printf("real: [%i]\n", -203);
+	ft_printf("mine: [%i]\n", -203);
+	printf("real: [%i]\n", -23);
+	ft_printf("mine: [%i]\n", -23);
+	printf("real: [%020i]\n", 19999);
+	ft_printf("mine: [%020i]\n", 19999);
+	printf("real: [%+0i]\n", 10);
+	ft_printf("mine: [%+0i]\n", 10);
+	printf("real: [%-30i]\n", 7);
+	ft_printf("mine: [%-30i]\n", 7);
+	printf("real: [%10i]\n", -203);
+	ft_printf("mine: [%10i]\n\n", -203);
 	
 	
 	printf("-----STRINGS----\n\n");
@@ -126,7 +140,7 @@ int		main()
 	printf("real: [%.1d]\n", x);
 	printf("real: [%.2d]\n", x);
 	printf("real: [%.5s]\n","abcdefg");
-	printf("real: [%5.5s]\n","abcdefg");
+	printf("real: [%5.5s]\n\n","abcdefg");
 
 	printf("-----HEX-----\n\n");
 	printf("real: [before %x after]\n", 42);
@@ -148,7 +162,7 @@ int		main()
 	printf("real: [%5x]\n", -42);
 	ft_printf("mine: [%5x]\n", -42);
 	printf("real: [%x]\n", -123);
-	ft_printf("mine: [%x]\n", -123);
+	ft_printf("mine: [%x]\n\n", -123);
 	
 	printf("-----BIG-HEX----\n\n");
 	printf("real: [before %X after]\n", 42);
@@ -163,6 +177,7 @@ int		main()
 	ft_printf("mine: [%-30X]\n", -2);
 	printf("real: [%2X]\n", 42U);
 	ft_printf("mine: [%2X]\n", 42U);
+	printf("real: [%x%X%x%X]\n", -42, 42, -42, 42);
 	ft_printf("mine: [%x%X%x%X]\n\n", -42, 42, -42, 42);
 
 	printf("-----OCTAL-----\n\n");
@@ -203,13 +218,19 @@ int		main()
 
 	printf("-------UNSIGNED-----\n\n");
 	printf("real: [%u]\n", 15);
+	ft_printf("mine: [%u]\n", 15);
 	printf("real: [%u]\n", 10);
 	ft_printf("mine: [%u]\n", 10);
 	printf("real: [%u]\n", 5);
+	ft_printf("mine: [%u]\n", 5);
 	printf("real: [%u]\n", -5);
+	ft_printf("mine: [%u]\n", -5);
 	printf("real: [%u]\n", -10);
+	ft_printf("mine: [%u]\n", -10);
 	printf("real: [%10u]\n", 10);
-	printf("real: [%-10u]\n\n", 10);
+	ft_printf("mine: [%10u]\n", 10);
+	printf("real: [%-10u]\n", 10);
+	ft_printf("mine: [%-10u]\n\n", 10);
 	
 	printf("----ASTRICT----\n\n");
 	printf("real: [%*s]\n", 5, "abc");
@@ -225,14 +246,32 @@ int		main()
 	printf("real: [%*s]\n", -15, "abc");
 	ft_printf("mine: [%*s]\n", -15, "abc");
 	printf("real: [%-*s]\n", 6, "abc");
-	ft_printf("mine: [%-*s]\n", 6, "abc");
+	ft_printf("mine: [%-*s]\n\n", 6, "abc");
+
+	printf("------POINT-----\n\n");
+	int k = 5;
+	int *b = &k;
+	int f = -15;
+	int *e = &f;
+	int z = 2147483647;
+	int *y = &z;
+	char *lll = "abc";
+	//void *lol = &lll;
+	printf("real: [%p]\n", b);
+	ft_printf("mine: [%p]\n", b);
+	printf("real: [%p]\n", e);
+	ft_printf("mine: [%p]\n", e);
+	printf("real: [%p]\n", y);
+	ft_printf("mine: [%p]\n", y);
+	printf("real: [%p]\n", &lll);
+	ft_printf("mine: [%p]\n", &lll);
 	// int nb1 = ft_printf("%s", NULL);
 	// int nb2 = printf("%s", NULL);
 	// // int nb3 = ft_printf("%c", 0);
 	// // int nb4 = printf("%c", 0);
 	// // int nb5 = ft_printf("%-65x", 42);
 	// // int nb6 = printf("%-65x", 42);
-	// printf("YOURS %d\n", nb1);
+	// printf("YOURS %d\n", nb2);
 	// printf("OFFICIAL %d\n", nb2);
 	// // printf("------------------------------\n");
 	// // printf("YOURS %d\n", nb3);

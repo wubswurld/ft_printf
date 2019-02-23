@@ -14,10 +14,10 @@
 
 void    check_octal(t_whole *sp)
 {
-   sp->post = va_arg(sp->arg, int);
+    sp->post = va_arg(sp->arg, int);
+    sp->output = ft_uitoa_base(sp->post, 8);
     if (sp->ptr->tmp == 'o' && sp->ptr->minus == FALSE)
     {
-        sp->output = ft_uitoa_base(sp->post, 8);
         oct_width(sp);
         if (sp->ptr->hash == TRUE)
             write(1, "0", 2);
@@ -25,7 +25,6 @@ void    check_octal(t_whole *sp)
     }
     if (sp->ptr->tmp == 'o' && sp->ptr->minus == TRUE)
     {
-        sp->output = ft_uitoa_base(sp->post, 8);
         if (sp->ptr->hash == TRUE)
             write(1, "0", 2);
         ft_putstr(sp->output);

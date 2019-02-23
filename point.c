@@ -12,4 +12,36 @@
 
 #include "ft_printf.h"
 
+void    check_point(t_whole *sp)
+{
+    void    *vp;
+    char     *zp;
 
+    zp = "0x";
+    vp = va_arg(sp->arg, void *);
+    sp->output = ft_ulltoa_base((unsigned long long)vp, 16);
+    if (sp->ptr->tmp == 'p' && sp->ptr->minus == FALSE)
+    {
+        point_width(sp);
+        ft_putstr("0x");
+        ft_putstr(sp->output);
+    }
+    if (sp->ptr->tmp == 'p' && sp->ptr->minus == TRUE)
+    {
+        ft_putstr("0x");
+        ft_putstr(sp->output);
+        point_width(sp);
+    }
+}
+
+void    point_width(t_whole *sp)
+{
+    while (sp->ptr->width > 1)
+    {
+        if (sp->ptr->zero == FALSE)
+            ft_putchar(' ');
+        if (sp->ptr->zero == TRUE)
+            ft_putchar('0');
+        sp->ptr->width--;
+    }
+}

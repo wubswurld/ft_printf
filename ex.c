@@ -63,9 +63,9 @@ void      check_char(t_whole *sp)
 void        check_hex(t_whole *sp)
 {
     sp->post = va_arg(sp->arg, int);
+    sp->output = ft_uitoa_base(sp->post, 16);
     if (sp->ptr->tmp == 'x' && sp->ptr->minus == FALSE)
     {
-        sp->output = ft_uitoa_base(sp->post, 16);
         hex_width(sp);
         if (sp->ptr->hash == TRUE)
             write(1, "0x", 2);
@@ -73,7 +73,6 @@ void        check_hex(t_whole *sp)
     }
     if (sp->ptr->tmp == 'x' && sp->ptr->minus == TRUE)
     {
-        sp->output = ft_uitoa_base(sp->post, 16);
         if (sp->ptr->hash == TRUE)
             write(1, "0x", 2);
         ft_putstr(sp->output);

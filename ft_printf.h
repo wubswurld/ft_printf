@@ -48,6 +48,7 @@ typedef	struct s_whole
 	int		rtn;
 	int     arr;
 	int 	post;
+	unsigned int ant;
 	char	*output;
 	va_list arg;
 	t_adds	*ptr;
@@ -66,6 +67,7 @@ void    	check_octal(t_whole *sp);
 void      	check_per(t_whole *sp);
 void        check_bighex(t_whole *sp);
 void        check_unsigned(t_whole *sp);
+void    	check_point(t_whole *sp);
 //width
 void        ft_width(const char *format, t_whole *sp);
 void        oct_width(t_whole *sp);
@@ -74,6 +76,8 @@ void    	per_width(t_whole *sp);
 void       	get_width(t_whole *sp);
 void        str_width(t_whole *sp);
 void        hex_width(t_whole *sp);
+void    	point_width(t_whole *sp);
+void        u_width(t_whole *sp);
 // boolean funcs
 void    	ft_minus(const char *format, t_whole *sp);
 void    	ft_plus(const char *format, t_whole *sp);
@@ -83,6 +87,7 @@ void    	ft_space(const char *format, t_whole *sp);
 void    	ft_star(const char *format, t_whole *sp);
 //libft/helpers
 char		*ft_uitoa_base(unsigned int val, int base);
+char		*ft_ulltoa_base(unsigned long long int val, int base);
 void		ft_putchar(char c);
 void    	ft_putstr(char *str);
 int			mod_strchr(char c, char *s1);
@@ -97,6 +102,7 @@ int			ft_atoi(const char *str);
 int			ft_isdigit(int c);
 char		*ft_uitoa_bigbase(unsigned int val, int base);
 void		ft_strdel(char **as);
+char		*ft_ultoa(unsigned long n);
 //initialize
 void    	ft_zero(t_adds *ptr);
 
