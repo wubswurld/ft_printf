@@ -12,10 +12,24 @@
 
 #include "ft_printf.h"
 
-// void        ft_prec(const char *format, t_whole *sp)
-// {
-//     if (format[sp->x + 1] == '.' && format[sp->x + 1] != '\0')
-//     {
-        
-//     }
-// }
+void        ft_prec(const char *format, t_whole *sp)
+{
+    // if (format[sp->x + 1] == '.' && format[sp->x + 2] == '*')
+    // {    
+    //     sp->ptr->precision = va_arg(sp->arg, int);
+    //     printf("%d", sp->ptr->precision);
+    //     sp->x++;
+    // }
+    if (format[sp->x + 1] == '.' && format[sp->x])
+    {
+        ++sp->x;
+        sp->ptr->precision += ft_atoi(&format[sp->x + 1]);
+        while (ft_isdigit(format[sp->x]))
+            ++sp->x;
+    }
+    else
+    {
+        sp->ptr->precision = FALSE;
+        sp->x++;
+    }
+}

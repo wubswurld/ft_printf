@@ -46,6 +46,8 @@ void    ft_setzero(const char *format, t_whole *sp)
     {
         sp->ptr->zero = TRUE;
         sp->x++;
+        while (format[sp->x + 1] == '0' && format[sp->x + 1] == '0')
+            ++sp->x;
     }
     else
     {

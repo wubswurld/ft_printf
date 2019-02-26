@@ -26,6 +26,7 @@ void    ft_zero(t_adds *ptr)
 
 int        check_flags(t_whole *sp)
 {
+    sp->cur = 0;
     if (sp->ptr->tmp)
     {
         if (sp->ptr->tmp == 'c')
@@ -46,15 +47,19 @@ int        check_flags(t_whole *sp)
             check_point(sp);
         if (sp->ptr->tmp == 'u')
             check_unsigned(sp);
+        if (sp->ptr->tmp == 'b')
+            check_binary(sp);
         sp->x++;
     }
-    return (sp->rtn);
+    return (sp->cur + 1);
 }
 
 int         ft_flags(const char *format, t_whole *sp)
 {
     if (!mod_strchr(format[sp->x], "sSpdDioOUxXcC") && format[sp->x])
     {
+        // if (mod_strchr(format[sp->x + 1], "hhllL"))
+        //     ft_len(format, sp);
         if (format[sp->x] != '\0' && format[sp->x + 1] == '-')
             ft_minus(format, sp);
         if (format[sp->x + 1] == '+' && format[sp->x] != '\0')
@@ -67,11 +72,10 @@ int         ft_flags(const char *format, t_whole *sp)
             ft_space(format, sp);
         if (format[sp->x + 1] == '*' && format[sp->x + 1] != '\0')
             ft_star(format, sp);
-        // if (format[sp->x + 1] == '.' && format[sp->x + 1] != '\0')
-        //     ft_prec(format, sp);    
+        if (format[sp->x + 1] == '.' && format[sp->x])
+            ft_prec(format, sp);    
         if (ft_isdigit(format[sp->x + 1]) && format[sp->x])
             ft_width(format, sp);
-        sp->rtn++;
     }
     sp->ptr->tmp = format[sp->x + 1];
     return (check_flags(sp));
@@ -91,7 +95,7 @@ int			parse(const char *format, t_whole *sp)
         if (format[sp->x] == '%')
         {
             //add # of chars to the end of rtn & return # of chars
-            sp->rtn += ft_flags(format, sp);
+            ft_flags(format, sp);
             ft_zero(sp->ptr);
         }
         sp->x++;
@@ -102,6 +106,7 @@ int			parse(const char *format, t_whole *sp)
 int     ft_printf(const char *format, ...)
 {
     t_whole *sp;
+    int val;
 
     if (!(sp = (t_whole *)malloc(sizeof(t_whole))))
         exit(1);
@@ -111,5 +116,8 @@ int     ft_printf(const char *format, ...)
     ft_zero(sp->ptr);
     sp->rtn = parse(format, sp);
     va_end(sp->arg);
-    return(sp->rtn);
+    val = sp->rtn;
+    free(sp->ptr);
+    free(sp);
+    return(val);
 }

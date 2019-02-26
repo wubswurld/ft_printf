@@ -34,7 +34,7 @@ void      check_per(t_whole *sp)
     if (sp->ptr->tmp == '%' && sp->ptr->minus == FALSE)
     {
         per_width(sp);    
-        ft_putchar('%');
+        ft_putchar('%');     
     }
     if (sp->ptr->tmp == '%' && sp->ptr->minus == TRUE)
     {
@@ -48,6 +48,11 @@ void      check_char(t_whole *sp)
     char pst;
     
     pst = va_arg(sp->arg, int);
+    if (!pst || ft_isdigit(pst))
+    {
+        ft_putstr("(null)");
+        return ;
+    }
     sp->output = &pst;
     if (sp->ptr->tmp == 'c' && sp->ptr->minus == FALSE)
     {
@@ -82,11 +87,14 @@ void        check_hex(t_whole *sp)
 
 void         check_str(t_whole *sp)
 {
-    int    x;
     char *tp;
 
-    x = 0;
     tp = va_arg(sp->arg, char *);
+    if (!tp)
+    {
+        ft_putstr("(null)");
+        return ;
+    }
     sp->output = ft_strdup((char *)tp);
     if (sp->ptr->tmp == 's' && sp->ptr->minus == FALSE)
     {
@@ -100,3 +108,33 @@ void         check_str(t_whole *sp)
     }
 }
 
+void    check_prec(t_whole *sp)
+{
+    char *new;
+
+    if (sp->ptr->tmp == 's' && sp->ptr->precision >= 0)
+    {
+        new = ft_strnew(sp->ptr->precision);
+        ft_memccpy(new, sp->output, 0, sp->ptr->precision);
+        free(sp->output);
+        sp->output = new;
+    }
+}
+
+void	*ft_memccpy(void *s1, const void *s2, int c, size_t n)
+{
+	size_t x;
+
+	x = 0;
+	while (x < n)
+	{
+		if (((unsigned char *)s2)[x] == (unsigned char)c)
+		{
+			((unsigned char *)s1)[x] = ((unsigned char *)s2)[x];
+			return (s1 + x + 1);
+		}
+		((unsigned char *)s1)[x] = ((unsigned char *)s2)[x];
+		x++;
+	}
+	return (NULL);
+}

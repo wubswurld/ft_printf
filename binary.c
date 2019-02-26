@@ -1,44 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   point.c                                            :+:      :+:    :+:   */
+/*   binary.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jawatter <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/22 10:37:48 by jawatter          #+#    #+#             */
-/*   Updated: 2019/02/22 10:38:03 by jawatter         ###   ########.fr       */
+/*   Created: 2019/02/24 14:33:05 by jawatter          #+#    #+#             */
+/*   Updated: 2019/02/24 14:33:23 by jawatter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void    check_point(t_whole *sp)
+void    check_binary(t_whole *sp)
 {
-    void    *vp;
-    char     *zp;
-
-    zp = "0x";
-    vp = va_arg(sp->arg, void *);
-    sp->output = ft_ulltoa_base((unsigned long long)vp, 16);
-    if (sp->ptr->tmp == 'p' && sp->ptr->minus == FALSE)
+    sp->post = va_arg(sp->arg, int);
+    sp->output = ft_uitoa_base(sp->post, 2);
+    if (sp->ptr->tmp == 'b' && sp->ptr->minus == FALSE)
     {
-        point_width(sp);
-        ft_putstr("0x");
+        binary_width(sp);
         ft_putstr(sp->output);
     }
-    if (sp->ptr->tmp == 'p' && sp->ptr->minus == TRUE)
+    if (sp->ptr->tmp == 'b' && sp->ptr->minus == TRUE)
     {
-        ft_putstr("0x");
         ft_putstr(sp->output);
-        point_width(sp);
+        binary_width(sp);
     }
 }
 
-void    point_width(t_whole *sp)
+void    binary_width(t_whole *sp)
 {
     int z;
 
-    z = ft_strlen(sp->output) + 2;
+    z = ft_strlen(sp->output);
     while (sp->ptr->width > z)
     {
         if (sp->ptr->zero == FALSE)

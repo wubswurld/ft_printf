@@ -14,7 +14,7 @@
 
 void        ft_width(const char *format, t_whole *sp)
 {
-    if (format[sp->x] != '\0' && format[sp->x + 1] >= '1' && format[sp->x +1] <= '9')
+    if (format[sp->x] != '\0' && format[sp->x + 1] >= '1' && format[sp->x + 1] <= '9')
     {
         sp->ptr->width += ft_atoi(&format[sp->x + 1]);
         while (format[sp->x + 1] >= '0' && format[sp->x + 1] <= '9')
