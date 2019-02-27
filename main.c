@@ -84,8 +84,14 @@ int		main()
 	ft_printf("mine: [%d]\n", -2147483649);
 	printf("real: [%00d]\n", -42);
 	ft_printf("mine: [%00d]\n", -42);
+	printf("real: [%hd]\n", 32768);
+	ft_printf("mine: [%hd]\n", 32768);
 	printf("real: [%d]\n", -2035065302);
-	ft_printf("mine: [%d]\n\n", -2035065302);
+	ft_printf("mine: [%d]\n", -2035065302);
+	// printf("real: [%hhd]\n", 32767);
+	// ft_printf("mine: [%hhd]\n", 32767);
+	// printf("real: [%hhd]\n", 1);
+	// ft_printf("mine: [%hhd]\n", 1);
 	// int f1t = ft_printf("mine is [%d]\n", -42);
 	// int o1g = printf("real is [%d]\n", -42);
 	// printf("mine: [%d]\n", f1t);
@@ -192,7 +198,9 @@ int		main()
 	printf("real: [%5x]\n", -42);
 	ft_printf("mine: [%5x]\n", -42);
 	printf("real: [%x]\n", -123);
-	ft_printf("mine: [%x]\n\n", -123);
+	ft_printf("mine: [%x]\n", -123);
+	printf("real: [%#lx]\n", 9223372036854775807);
+	ft_printf("mine: [%#lx]\n\n", 9223372036854775807);
 	
 	printf("-----BIG-HEX----\n\n");
 	printf("real: [before %X after]\n", 42);

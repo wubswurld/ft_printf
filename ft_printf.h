@@ -59,6 +59,7 @@ typedef	struct s_whole
 int			ft_printf(const char *format, ...);
 int			parse(const char *format, t_whole *sp);
 int         ft_flags(const char *format, t_whole *sp);
+int        	check_flags(t_whole *sp);
 // add funcs
 void        check_str(t_whole *sp);
 void        check_digit(t_whole *sp);
@@ -71,6 +72,7 @@ void        check_unsigned(t_whole *sp);
 void    	check_point(t_whole *sp);
 void    	check_binary(t_whole *sp);
 void    	check_prec(t_whole *sp);
+void        ft_len(const char *format, t_whole *sp);
 //width
 void        ft_width(const char *format, t_whole *sp);
 void        oct_width(t_whole *sp);
@@ -91,8 +93,9 @@ void    	ft_space(const char *format, t_whole *sp);
 void    	ft_star(const char *format, t_whole *sp);
 void        ft_prec(const char *format, t_whole *sp);
 //libft/helpers
+char		*ft_itoa(int nbr);
 char		*ft_uitoa_base(unsigned int val, int base);
-char		*ft_ulltoa_base(unsigned long long int val, int base);
+char		*ft_ulltoa_base(unsigned long long val, int base);
 void		ft_putchar(char c);
 void    	ft_putstr(char *str);
 int			mod_strchr(char c, char *s1);
@@ -108,7 +111,7 @@ int			ft_isdigit(int c);
 char		*ft_uitoa_bigbase(unsigned int val, int base);
 void		ft_strdel(char **as);
 char		*ft_ultoa(unsigned long n);
-void	*ft_memccpy(void *s1, const void *s2, int c, size_t n);
+void	*ft_memcpy(void *s1, const void *s2, size_t n);
 //initialize
 void    	ft_zero(t_adds *ptr);
 
