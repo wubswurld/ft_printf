@@ -33,3 +33,16 @@ void        ft_prec(const char *format, t_whole *sp)
         sp->x++;
     }
 }
+
+void    check_prec(t_whole *sp)
+{
+    char *new;
+
+    if (sp->ptr->tmp == 's' && sp->ptr->precision >= 0)
+    {
+        new = ft_strnew(sp->ptr->precision + 1);
+        ft_memcpy(new, sp->output, sp->ptr->precision);
+        free(sp->output);
+        sp->output = new;
+    }
+}

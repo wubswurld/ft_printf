@@ -74,9 +74,10 @@ void    ft_space(const char *format, t_whole *sp)
 {
     if (format[sp->x] != '\0' && format[sp->x + 1] == ' ')
     {
-        while (format[sp->x + 1] == ' ')
-            ++sp->x;
         sp->ptr->space = TRUE;
+        sp->x++;
+        while (format[sp->x + 1] == ' ' && format[sp->x])
+            ++sp->x;
     }
     else
     {

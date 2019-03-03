@@ -20,6 +20,7 @@ void    check_point(t_whole *sp)
     zp = "0x";
     vp = va_arg(sp->arg, void *);
     sp->output = ft_ulltoa_base((unsigned long long)vp, 16);
+    sp->cur = ft_strlen(sp->output) + 2;
     if (sp->ptr->tmp == 'p' && sp->ptr->minus == FALSE)
     {
         point_width(sp);
@@ -39,6 +40,8 @@ void    point_width(t_whole *sp)
     int z;
 
     z = ft_strlen(sp->output) + 2;
+    while (sp->cur < sp->ptr->width)
+        sp->cur += sp->ptr->width - sp->cur;
     while (sp->ptr->width > z)
     {
         if (sp->ptr->zero == FALSE)

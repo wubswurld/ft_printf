@@ -12,27 +12,33 @@
 
 #include "ft_printf.h"
 
-void         check_digit(t_whole *sp)
+char	*ft_ltoa(long n)
 {
-    sp->arr = va_arg(sp->arg, int);
-    if (sp->ptr->len == 1)
-        sp->output = ft_itoa((short)sp->arr);
-    else if (sp->ptr->len == 0)
-        sp->output = ft_itoa(sp->arr);
-    if ((sp->ptr->tmp == 'd' || sp->ptr->tmp == 'i') && sp->ptr->minus == FALSE)
-    {
-        int_width(sp);
-        if (sp->ptr->plus == TRUE && sp->arr > 0)
-            ft_putchar('+');
-        ft_putstr(sp->output);
-        //ft_putnbr(sp->arr);
-    }
-    if ((sp->ptr->tmp == 'd' || sp->ptr->tmp == 'i') && sp->ptr->minus == TRUE)
-    {
-        ft_putstr(sp->output);
-        //ft_putnbr(sp->arr);
-        int_width(sp);
-    }
+	char	*s;
+	long	nb;
+	int		len;
+
+	if (n == LONG_MIN)
+		return (ft_strdup("-9223372036854775808"));
+	len = 1;
+	n < 0 ? ++len : 0;
+	nb = n < 0 ? -n : n;
+	while (nb > 9)
+	{
+		nb /= 10;
+		++len;
+	}
+	s = (char*)malloc(sizeof(char) * (len + 1));
+	s[len] = '\0';
+	n < 0 ? *s = '-' : 0;
+	n < 0 ? n = -n : 0;
+	while (n > 9)
+	{
+		s[--len] = (n % 10) + 48;
+		n /= 10;
+	}
+	s[--len] = n + 48;
+	return (s);
 }
 
 char	*ft_itoa(int nbr)
@@ -63,30 +69,16 @@ char	*ft_itoa(int nbr)
 	return (str);
 }
 
-void      check_per(t_whole *sp)
-{
-    if (sp->ptr->tmp == '%' && sp->ptr->minus == FALSE)
-    {
-        per_width(sp);    
-        ft_putchar('%');     
-    }
-    if (sp->ptr->tmp == '%' && sp->ptr->minus == TRUE)
-    {
-        ft_putchar('%');
-        per_width(sp);
-    }
-}
-
 void      check_char(t_whole *sp)
 {  
     char pst;
     
     pst = va_arg(sp->arg, int);
-    if (!pst || ft_isdigit(pst))
-    {
-        ft_putstr("(null)");
-        return ;
-    }
+    // if (!pst || ft_isdigit(pst))
+    // {
+    //     ft_putstr("(null)");
+    //     return ;
+    // }
     sp->output = &pst;
     if (sp->ptr->tmp == 'c' && sp->ptr->minus == FALSE)
     {
@@ -99,20 +91,25 @@ void      check_char(t_whole *sp)
         get_width(sp);
     }
 }
+
 void        check_hex(t_whole *sp)
 {
     sp->post = va_arg(sp->arg, int);
-    sp->output = ft_uitoa_base(sp->post, 16);
+    if (!sp->ptr->len || sp->ptr->len == 1 || sp->ptr->len == 2 || sp->ptr->len == 3 || sp->ptr->len == 4)
+        hex_lenmod(sp);
+    sp->cur = ft_strlen(sp->output);
+    // if (sp->ptr->hash == TRUE && !sp->post)
+    //     sp->cur -= 2;
     if (sp->ptr->tmp == 'x' && sp->ptr->minus == FALSE)
     {
         hex_width(sp);
-        if (sp->ptr->hash == TRUE)
+        if (sp->ptr->hash == TRUE && sp->post != 0)
             write(1, "0x", 2);
         ft_putstr(sp->output);
     }
-    if (sp->ptr->tmp == 'x' && sp->ptr->minus == TRUE)
+    if (sp->ptr->tmp == 'x' && sp->ptr->minus == TRUE) 
     {
-        if (sp->ptr->hash == TRUE)
+        if (sp->ptr->hash == TRUE && sp->post != 0)
             write(1, "0x", 2);
         ft_putstr(sp->output);
         hex_width(sp);
@@ -130,6 +127,7 @@ void         check_str(t_whole *sp)
         return ;
     }
     sp->output = ft_strdup((char *)tp);
+    sp->cur = ft_strlen(sp->output);
     if (sp->ptr->tmp == 's' && sp->ptr->minus == FALSE)
     {
         str_width(sp);
@@ -140,19 +138,19 @@ void         check_str(t_whole *sp)
         ft_putstr(sp->output);
         str_width(sp);
     }
-    sp->rtn += ft_strlen(sp->output);
 }
 
-void    check_prec(t_whole *sp)
+void      check_per(t_whole *sp)
 {
-    char *new;
-
-    if (sp->ptr->tmp == 's' && sp->ptr->precision >= 0)
+    if (sp->ptr->tmp == '%' && sp->ptr->minus == FALSE)
     {
-        new = ft_strnew(sp->ptr->precision + 1);
-        ft_memcpy(new, sp->output, sp->ptr->precision);
-        free(sp->output);
-        sp->output = new;
+        per_width(sp);    
+        ft_putchar('%');     
+    }
+    if (sp->ptr->tmp == '%' && sp->ptr->minus == TRUE)
+    {
+        ft_putchar('%');
+        per_width(sp);
     }
 }
 

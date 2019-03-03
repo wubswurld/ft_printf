@@ -20,6 +20,7 @@
 # include <wchar.h>
 # include <locale.h>
 # include <unistd.h>
+#include <limits.h>
 
 //boolean
 # define TRUE 1
@@ -47,7 +48,7 @@ typedef	struct s_whole
 	int		x;
 	int		a;
 	int		rtn;
-	int     arr;
+	long     arr;
 	int 	post;
 	unsigned int ant;
 	char	*output;
@@ -60,9 +61,12 @@ int			ft_printf(const char *format, ...);
 int			parse(const char *format, t_whole *sp);
 int         ft_flags(const char *format, t_whole *sp);
 int        	check_flags(t_whole *sp);
+//INT
+void         handle_intmod(t_whole *sp);
+void     	 int_width(t_whole *sp);
+void         check_digit(t_whole *sp);
 // add funcs
 void        check_str(t_whole *sp);
-void        check_digit(t_whole *sp);
 void        check_hex(t_whole *sp);
 void	    check_char(t_whole *sp);
 void    	check_octal(t_whole *sp);
@@ -76,7 +80,6 @@ void        ft_len(const char *format, t_whole *sp);
 //width
 void        ft_width(const char *format, t_whole *sp);
 void        oct_width(t_whole *sp);
-void     	int_width(t_whole *sp);
 void    	per_width(t_whole *sp);
 void       	get_width(t_whole *sp);
 void        str_width(t_whole *sp);
@@ -110,8 +113,10 @@ int			ft_atoi(const char *str);
 int			ft_isdigit(int c);
 char		*ft_uitoa_bigbase(unsigned int val, int base);
 void		ft_strdel(char **as);
-char		*ft_ultoa(unsigned long n);
-void	*ft_memcpy(void *s1, const void *s2, size_t n);
+char		*ft_ultoa(long n);
+void		*ft_memcpy(void *s1, const void *s2, size_t n);
+void        hex_lenmod(t_whole *sp);
+char		*ft_ltoa(long n);
 //initialize
 void    	ft_zero(t_adds *ptr);
 

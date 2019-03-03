@@ -44,6 +44,8 @@ int     num_len(int c)
     int x;
 
     x = 0;
+    if (c < 0)
+        x -= -1;
     while (c)
     {
         c /= 10;
