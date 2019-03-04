@@ -74,7 +74,7 @@ int		ft_atoi(const char *str)
 	return (num * neg);
 }
 
-char	*ft_ulltoa_base(unsigned long long int val, int base)
+char	*ft_ulltoa_base(unsigned long long val, int base)
 {
 	// max base of 16 is = to 0123456789abcdef
 	static char tmp[] = "0123456789abcdef";

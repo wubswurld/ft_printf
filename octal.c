@@ -17,6 +17,8 @@ void    check_octal(t_whole *sp)
     sp->post = va_arg(sp->arg, int);
     sp->output = ft_uitoa_base(sp->post, 8);
     sp->cur = ft_strlen(sp->output);
+    if (sp->ptr->zero == TRUE && sp->ptr->minus == TRUE)
+        sp->ptr->zero = FALSE;
     if (sp->ptr->tmp == 'o' && sp->ptr->minus == FALSE)
     {
         oct_width(sp);

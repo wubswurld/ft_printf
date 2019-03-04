@@ -65,12 +65,12 @@ void        hex_width(t_whole *sp)
     a = ft_strlen(sp->output);
     while (sp->cur < sp->ptr->width)
         sp->cur += sp->ptr->width - sp->cur;
-    if (sp->ptr->hash == TRUE && !sp->post)
-        sp->cur -= 1;
+    // if (sp->ptr->hash == TRUE && !sp->post)
+    //     sp->cur -= 1;
     if (sp->ptr->hash == TRUE)
     {
         sp->ptr->width = sp->ptr->width - 2;
-        sp->cur += 2;
+        sp->cur = sp->cur + 2;
     }
     if (sp->ptr->hash && sp->ptr->width)
         sp->cur = sp->cur - 2;

@@ -35,7 +35,7 @@ void        ft_len(const char *format, t_whole *sp)
         sp->ptr->len = 1;
     else if (format[sp->x + 1] == 'h' && format[sp->x + 2] == 'h')
     { 
-        ++sp->x;
+        sp->x++;
         sp->ptr->len = 2;
     }
     else if (format[sp->x + 1] == 'l' && format[sp->x + 2] != 'l')

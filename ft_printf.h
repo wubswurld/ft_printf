@@ -77,6 +77,7 @@ void    	check_point(t_whole *sp);
 void    	check_binary(t_whole *sp);
 void    	check_prec(t_whole *sp);
 void        ft_len(const char *format, t_whole *sp);
+void        unsignedmod(t_whole *sp);
 //width
 void        ft_width(const char *format, t_whole *sp);
 void        oct_width(t_whole *sp);

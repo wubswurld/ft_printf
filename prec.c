@@ -20,6 +20,8 @@ void        ft_prec(const char *format, t_whole *sp)
     //     printf("%d", sp->ptr->precision);
     //     sp->x++;
     // }
+    if (format[sp->x + 1] == '.' && format[sp->x + 2] >= 0)
+        ++sp->x;
     if (format[sp->x + 1] == '.' && format[sp->x])
     {
         ++sp->x;
@@ -38,7 +40,7 @@ void    check_prec(t_whole *sp)
 {
     char *new;
 
-    if (sp->ptr->tmp == 's' && sp->ptr->precision >= 0)
+    if (sp->ptr->tmp == 'c' && sp->ptr->precision >= 0)
     {
         new = ft_strnew(sp->ptr->precision + 1);
         ft_memcpy(new, sp->output, sp->ptr->precision);

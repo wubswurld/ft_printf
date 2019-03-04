@@ -33,10 +33,25 @@ void        check_bighex(t_whole *sp)
     }
 }
 
+void        unsignedmod(t_whole *sp)
+{
+    if (sp->ptr->len == 0)
+        sp->output = ft_ultoa((unsigned int)sp->ant);
+    if (sp->ptr->len == 1)
+        sp->output = ft_ultoa((unsigned short)sp->ant);
+    if (sp->ptr->len == 2)
+        sp->output = ft_ultoa((unsigned char)sp->ant);
+    if (sp->ptr->len == 3)
+        sp->output = ft_ultoa((unsigned long)sp->ant);
+    if (sp->ptr->len == 4)
+        sp->output = ft_ultoa(sp->ant);
+}
+
 void        check_unsigned(t_whole *sp)
 {
     sp->ant = va_arg(sp->arg, unsigned int);
-    sp->output = ft_ultoa((unsigned int) sp->ant);
+    if (!sp->ptr->len || sp->ptr->len == 1 || sp->ptr->len == 2 || sp->ptr->len == 3 || sp->ptr->len == 4)
+        unsignedmod(sp);
     sp->cur = ft_strlen(sp->output);
     if (sp->ptr->tmp == 'u' && sp->ptr->minus == FALSE)
     {

@@ -142,6 +142,7 @@ void         check_str(t_whole *sp)
 
 void      check_per(t_whole *sp)
 {
+    check_prec(sp);
     if (sp->ptr->tmp == '%' && sp->ptr->minus == FALSE)
     {
         per_width(sp);    
