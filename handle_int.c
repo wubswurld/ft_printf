@@ -33,11 +33,15 @@ void         check_digit(t_whole *sp)
     if (!sp->ptr->len || sp->ptr->len == 1 || sp->ptr->len == 2 || sp->ptr->len == 3 || sp->ptr->len == 4)
         handle_intmod(sp);
     sp->cur = ft_strlen(sp->output);
+    prec_int(sp);
     if ((sp->ptr->tmp == 'd' || sp->ptr->tmp == 'i') && sp->ptr->minus == FALSE)
     {
         int_width(sp);
         if (sp->ptr->plus == TRUE && sp->arr >= 0)
+        {
             ft_putchar('+');
+            sp->cur += 1;
+        }
         ft_putstr(sp->output);
         //ft_putnbr(sp->arr);
     }
@@ -86,8 +90,14 @@ void     int_width(t_whole *sp)
         sp->ptr->width -= 1;
     if (sp->arr <= 0)
         sp->ptr->width -= 1;
-    if (sp->ptr->space == TRUE && sp->arr >= 0)
+    if (sp->ptr->space == TRUE && sp->arr >= 0 && sp->ptr->plus == FALSE)
+    {   
         ft_putchar(' ');
+        sp->cur += 1;
+    }
+    if (sp->ptr->zero == TRUE && sp->ptr->minus == TRUE)
+        sp->ptr->zero = FALSE;
+    check_prec(sp);
     while (sp->ptr->width > x)
     {
         if (sp->ptr->zero == FALSE)

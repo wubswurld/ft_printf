@@ -45,8 +45,8 @@ void    ft_setzero(const char *format, t_whole *sp)
     if (format[sp->x] != '\0' && format[sp->x + 1] == '0')
     {
         sp->ptr->zero = TRUE;
-        sp->x++;
-        while (format[sp->x + 1] == '0' && format[sp->x + 1] == '0')
+        ++sp->x;
+        while (format[sp->x + 1] == '0')
             ++sp->x;
     }
     else
@@ -72,16 +72,16 @@ void    ft_hash(const char *format, t_whole *sp)
 
 void    ft_space(const char *format, t_whole *sp)
 {
-    if (format[sp->x] != '\0' && format[sp->x + 1] == ' ')
+    while (format[sp->x] != '\0' && format[sp->x + 1] == ' ')
     {
         sp->ptr->space = TRUE;
         sp->x++;
         while (format[sp->x + 1] == ' ' && format[sp->x])
-            ++sp->x;
+            sp->x++;
     }
-    else
-    {
-        sp->ptr->space = FALSE;
-        sp->x++;
-    }
+    // else
+    // {
+    //     sp->ptr->space = FALSE;
+    //     sp->x++;
+    // }
 }

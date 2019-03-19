@@ -80,6 +80,7 @@ void      check_char(t_whole *sp)
     //     return ;
     // }
     sp->output = &pst;
+    //check_prec(sp);
     if (sp->ptr->tmp == 'c' && sp->ptr->minus == FALSE)
     {
         get_width(sp);
@@ -95,22 +96,29 @@ void      check_char(t_whole *sp)
 void        check_hex(t_whole *sp)
 {
     sp->post = va_arg(sp->arg, int);
-    if (!sp->ptr->len || sp->ptr->len == 1 || sp->ptr->len == 2 || sp->ptr->len == 3 || sp->ptr->len == 4)
-        hex_lenmod(sp);
+    if (sp->ptr->len == 0 || sp->ptr->len == 1 || sp->ptr->len == 2 || sp->ptr->len == 3 || sp->ptr->len == 4)
+        set_hexlen(sp); 
     sp->cur = ft_strlen(sp->output);
     // if (sp->ptr->hash == TRUE && !sp->post)
     //     sp->cur -= 2;
+    check_prec(sp);
     if (sp->ptr->tmp == 'x' && sp->ptr->minus == FALSE)
     {
         hex_width(sp);
         if (sp->ptr->hash == TRUE && sp->post != 0)
+        {
             write(1, "0x", 2);
+            sp->cur += 2;
+        }
         ft_putstr(sp->output);
     }
     if (sp->ptr->tmp == 'x' && sp->ptr->minus == TRUE) 
     {
         if (sp->ptr->hash == TRUE && sp->post != 0)
+        { 
             write(1, "0x", 2);
+            sp->cur += 2;
+        }
         ft_putstr(sp->output);
         hex_width(sp);
     }
@@ -124,10 +132,13 @@ void         check_str(t_whole *sp)
     if (!tp)
     {
         ft_putstr("(null)");
+        sp->cur += 6;
         return ;
     }
     sp->output = ft_strdup((char *)tp);
     sp->cur = ft_strlen(sp->output);
+    if (sp->ptr->tmp == 's' && sp->ptr->precision >= 0)
+        check_prec(sp);
     if (sp->ptr->tmp == 's' && sp->ptr->minus == FALSE)
     {
         str_width(sp);
@@ -142,7 +153,7 @@ void         check_str(t_whole *sp)
 
 void      check_per(t_whole *sp)
 {
-    check_prec(sp);
+    //check_prec(sp);
     if (sp->ptr->tmp == '%' && sp->ptr->minus == FALSE)
     {
         per_width(sp);    

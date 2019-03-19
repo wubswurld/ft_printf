@@ -17,7 +17,7 @@ void    ft_zero(t_adds *ptr)
     ptr->plus = 0;
     ptr->minus = 0;
     ptr->width = 0;
-    ptr->precision = 0;
+    ptr->precision = -1;
     ptr->zero = 0;
     ptr->space = 0;
     ptr->len = 0;
@@ -71,7 +71,7 @@ int         ft_flags(const char *format, t_whole *sp)
         if (format[sp->x + 1] == '*' && format[sp->x + 1] != '\0')
             ft_star(format, sp);
         if (format[sp->x + 1] == '.' && format[sp->x])
-            ft_prec(format, sp);    
+            ft_prec(format, sp);
         if (ft_isdigit(format[sp->x + 1]) && format[sp->x])
             ft_width(format, sp);
         if (mod_strchr(format[sp->x + 1], "hhllL"))

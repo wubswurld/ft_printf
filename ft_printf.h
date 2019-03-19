@@ -50,6 +50,8 @@ typedef	struct s_whole
 	int		rtn;
 	long     arr;
 	int 	post;
+	long	p2;
+	unsigned long p1;
 	unsigned int ant;
 	char	*output;
 	va_list arg;
@@ -114,10 +116,20 @@ int			ft_atoi(const char *str);
 int			ft_isdigit(int c);
 char		*ft_uitoa_bigbase(unsigned int val, int base);
 void		ft_strdel(char **as);
-char		*ft_ultoa(long n);
+char		*ft_ultoa(unsigned long n);
 void		*ft_memcpy(void *s1, const void *s2, size_t n);
 void        hex_lenmod(t_whole *sp);
 char		*ft_ltoa(long n);
+char		*ft_ultoa_base(unsigned long val, int base);
+char		*ft_strsub(char const *s, unsigned int start, size_t len);
+char		*ft_strncpy(char *s1, const char *s2, size_t n);
+char		*ft_strjoin(char const *s1, char const *s2);
+char		*ft_strcat(char *s1, char *s2);
+char		*ft_strcpy(char *s1, char *s2);
+void    	prec_int(t_whole *sp);
+void    	prec_unsigned(t_whole *sp);
+void        set_hexlen(t_whole *sp);
+char		*ft_ulbase(unsigned long n, int base);
 //initialize
 void    	ft_zero(t_adds *ptr);
 

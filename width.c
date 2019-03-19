@@ -71,9 +71,11 @@ void        hex_width(t_whole *sp)
     {
         sp->ptr->width = sp->ptr->width - 2;
         sp->cur = sp->cur + 2;
+        if (sp->ptr->width == TRUE)
+            sp->cur -= 2;
     }
     if (sp->ptr->hash && sp->ptr->width)
-        sp->cur = sp->cur - 2;
+        sp->cur -= 2;
     while (sp->ptr->width > a)
     {
         if (sp->ptr->zero == FALSE)

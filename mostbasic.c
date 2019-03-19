@@ -40,6 +40,7 @@ char	*ft_strnew(size_t n)
 		return (NULL);
 	ft_memset(tmp, 0, n + 1);
 	return (tmp);
+	//free(tmp);
 }
 
 void	*ft_memset(void *a, int b, size_t n)

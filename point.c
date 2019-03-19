@@ -15,9 +15,7 @@
 void    check_point(t_whole *sp)
 {
     void    *vp;
-    char     *zp;
 
-    zp = "0x";
     vp = va_arg(sp->arg, void *);
     sp->output = ft_ulltoa_base((unsigned long long)vp, 16);
     sp->cur = ft_strlen(sp->output) + 2;

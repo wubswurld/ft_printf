@@ -12,19 +12,40 @@
 
 #include "ft_printf.h"
 
+void        set_hexlen(t_whole *sp)
+{
+    if (sp->ptr->len == 1 || sp->ptr->precision == 2 || sp->ptr->precision == 3 || sp->ptr->precision == 4 || sp->ptr->precision == 5)
+        sp->p1 = (unsigned long)sp->post; 
+    else if (sp->ptr->len == 1)
+    {
+        printf("lok");
+		sp->p1 = (unsigned short)sp->post;
+    }
+    else if (sp->ptr->len == 0)
+		sp->p1 = (unsigned int)sp->post;
+    if (sp->ptr->tmp == 'x')
+        sp->output = ft_uitoa_base(sp->p1, 16);
+}
+
 void        hex_lenmod(t_whole *sp)
 {
     // sp->output = ft_uitoa_base(sp->post, 16);
     // sp->cur = ft_strlen(sp->output);
     // printf("%d", sp->ptr->len);
-    if (!sp->ptr->len)
+    if (sp->ptr->len == 1 || sp->ptr->precision == 2 || sp->ptr->precision == 3 || sp->ptr->precision == 4 || sp->ptr->precision == 5)
+    {
+        printf("ok");
         sp->output = ft_uitoa_base(sp->post, 16);
+    }
     if (sp->ptr->len == 1)
-        sp->output = ft_uitoa_base((short)sp->post, 16);
+    {
+        printf("okk");
+        sp->output = ft_uitoa_base((unsigned short)sp->post, 16);
+    }
     if (sp->ptr->len == 2)
         sp->output = ft_uitoa_base((unsigned char)sp->post, 16);
     if (sp->ptr->len == 3)
-        sp->output = ft_uitoa_base((long)sp->post, 16);
+        sp->output = ft_ultoa_base((unsigned long)sp->post, 16);
     if (sp->ptr->len == 4)
         sp->output = ft_uitoa_base(sp->post, 16);
 }
